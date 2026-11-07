@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Eye, X, Globe, Share2, Code, Check, ExternalLink } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
+import { getImageSrc, handleImageError } from '../utils/images';
 
 interface SocialPreviewModalProps {
   isOpen: boolean;
@@ -17,25 +18,25 @@ export const SocialPreviewModal: React.FC<SocialPreviewModalProps> = ({ isOpen, 
   let pageTitle = 'JB Lux Enterprises | Luxury Urban Apparel & Menswear';
   let pageDesc =
     'Premium clothing brand offering stylish urban apparel and menswear in wholesale and retail. Gbode Ventures Plaza, Nnamdi Azikiwe St, Lagos Island, Nigeria.';
-  let pageImage = '/src/assets/images/hero_luxury_apparel_1793964581310.jpg';
+  let pageImage = '/images/hero_luxury_apparel_1793964581310.jpg';
 
   if (currentRoute === 'catalog') {
     pageTitle = 'Apparel Storefront & Wholesale Tiers | JB Lux Enterprises';
     pageDesc =
       'Explore bespoke Senator outfits, luxury streetwear hoodies, and tailored tuxedos. Wholesale volume discounts up to 45% with bank receipt verification.';
-    pageImage = '/src/assets/images/product_urban_bomber_1793964581140.jpg';
+    pageImage = '/images/product_urban_bomber_1793964581140.jpg';
   } else if (currentRoute === 'product-detail') {
     const prod = products.find(p => p.slug === routeParams.slug) || products[0];
     if (prod) {
       pageTitle = `${prod.name} | JB Lux Enterprises`;
       pageDesc = `${prod.tagline} — ${prod.description.slice(0, 140)}... Retail: ₦${prod.retailPrice.toLocaleString()}`;
-      pageImage = prod.images[0] || pageImage;
+      pageImage = getImageSrc(prod.images[0] || pageImage);
     }
   } else if (currentRoute === 'about') {
     pageTitle = 'Atelier Heritage & Lagos Island Studio | JB Lux Enterprises';
     pageDesc =
       'Discover the craftsmanship of JB Lux at Gbode Ventures Plaza, Nnamdi Azikiwe Street, Lagos Island. Master-tailored urban luxury and sartorial excellence.';
-    pageImage = '/src/assets/images/store_lagos_flagship_1793964582670.jpg';
+    pageImage = '/images/store_lagos_flagship_1793964582670.jpg';
   } else if (currentRoute === 'contact') {
     pageTitle = 'Contact & WhatsApp Atelier Concierge | JB Lux Enterprises';
     pageDesc =
@@ -126,6 +127,7 @@ export const SocialPreviewModal: React.FC<SocialPreviewModalProps> = ({ isOpen, 
                     src={pageImage}
                     alt={pageTitle}
                     className="w-full h-full object-cover"
+                    onError={handleImageError}
                   />
                   <div className="absolute top-2 right-2 px-2 py-0.5 rounded bg-black/70 backdrop-blur-sm text-[10px] font-mono text-white">
                     JB LUX
@@ -159,6 +161,7 @@ export const SocialPreviewModal: React.FC<SocialPreviewModalProps> = ({ isOpen, 
                       src={pageImage}
                       alt={pageTitle}
                       className="w-full h-full object-cover"
+                      onError={handleImageError}
                     />
                   </div>
                   <div className="p-2.5 space-y-1">

@@ -2,6 +2,7 @@ import React from 'react';
 import { useStore } from '../context/StoreContext';
 import { MapPin, Phone, Award, Sparkles, Scissors, Users, ArrowRight } from 'lucide-react';
 import { SEO } from '../components/SEO';
+import { handleImageError } from '../utils/images';
 
 export const AboutView: React.FC = () => {
   const { navigateTo, settings } = useStore();
@@ -11,7 +12,7 @@ export const AboutView: React.FC = () => {
       <SEO
         title="Lagos Island Flagship Studio & Atelier Heritage"
         description="Experience JB Lux at Gbode Ventures Plaza, Nnamdi Azikiwe Street, Lagos Island. Master-tailored urban luxury, bespoke ceremonial Senator attire, and wholesale production."
-        image="/src/assets/images/store_lagos_flagship_1793964582670.jpg"
+        image="/images/store_lagos_flagship_1793964582670.jpg"
         type="website"
       />
       {/* Hero Header */}
@@ -30,10 +31,11 @@ export const AboutView: React.FC = () => {
       {/* Flagship Visual Showcase */}
       <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border shadow-xl">
         <img
-          src="/src/assets/images/store_lagos_flagship_1793964582670.jpg"
+          src="/images/store_lagos_flagship_1793964582670.jpg"
           alt="JB Lux Flagship Atelier Lagos Island"
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
+          onError={handleImageError}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-8 sm:p-12">
           <div className="text-white space-y-2 max-w-xl">

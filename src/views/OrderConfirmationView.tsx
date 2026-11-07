@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { OrderStatus } from '../types';
 import { SEO } from '../components/SEO';
+import { getImageSrc, handleImageError } from '../utils/images';
 
 export const OrderConfirmationView: React.FC = () => {
   const { routeParams, getOrderById, navigateTo, sentEmails, viewEmail } = useStore();
@@ -211,10 +212,11 @@ export const OrderConfirmationView: React.FC = () => {
               <div key={i} className="flex items-center justify-between text-xs py-2 border-b border-border/50">
                 <div className="flex items-center gap-3">
                   <img
-                    src={it.image}
+                    src={getImageSrc(it.image)}
                     alt={it.name}
                     className="w-12 h-12 object-cover rounded bg-secondary shrink-0"
                     referrerPolicy="no-referrer"
+                    onError={handleImageError}
                   />
                   <div>
                     <strong className="text-foreground text-xs block">{it.name}</strong>

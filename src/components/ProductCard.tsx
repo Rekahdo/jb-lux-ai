@@ -2,6 +2,7 @@ import React from 'react';
 import { Product } from '../types';
 import { useStore } from '../context/StoreContext';
 import { ArrowUpRight, ShoppingBag } from 'lucide-react';
+import { getImageSrc, handleImageError } from '../utils/images';
 
 interface ProductCardProps {
   product: Product;
@@ -27,9 +28,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, wholesaleView
       {/* Product Image Container */}
       <div className="relative aspect-[4/3] bg-secondary/50 overflow-hidden">
         <img
-          src={product.images[0]}
+          src={getImageSrc(product.images[0])}
           alt={product.name}
           referrerPolicy="no-referrer"
+          onError={handleImageError}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
 

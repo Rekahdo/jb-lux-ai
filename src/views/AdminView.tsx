@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { Order, OrderStatus, Product } from '../types';
 import { SEO } from '../components/SEO';
+import { getImageSrc, handleImageError } from '../utils/images';
 
 export const AdminView: React.FC = () => {
   const {
@@ -112,7 +113,7 @@ export const AdminView: React.FC = () => {
       category: newProductCategory,
       description: newProductDesc || 'Handcrafted urban tailoring from Gbode Ventures Plaza atelier.',
       fullDescription: newProductDesc || 'Expertly finished in our Lagos Island studio with premium fabrics.',
-      images: ['/src/assets/images/product_urban_bomber_1793964581140.jpg'],
+      images: ['/images/product_urban_bomber_1793964581140.jpg'],
       retailPrice: Number(newProductPrice),
       wholesaleTiers: [
         { minQty: 5, discountPercent: 15 },
@@ -385,10 +386,11 @@ export const AdminView: React.FC = () => {
               >
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-secondary">
                   <img
-                    src={prod.images[0]}
+                    src={getImageSrc(prod.images[0])}
                     alt={prod.name}
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
+                    onError={handleImageError}
                   />
                   <div className="absolute top-2 right-2 flex items-center gap-1">
                     <button

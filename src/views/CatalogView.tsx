@@ -46,7 +46,7 @@ export const CatalogView: React.FC = () => {
       <SEO
         title="Apparel Storefront & Wholesale Tiers"
         description="Browse Nigerian bespoke luxury menswear, 500 GSM loopback streetwear hoodies, and tailored blazers. Volume wholesale discount tiers available."
-        image="/src/assets/images/product_urban_bomber_1793964581140.jpg"
+        image="/images/product_urban_bomber_1793964581140.jpg"
         type="website"
       />
       {/* Header */}

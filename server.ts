@@ -2,6 +2,10 @@ import express, { Request, Response } from 'express';
 import { createServer as createViteServer } from 'vite';
 import dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load .env
 dotenv.config();
@@ -11,6 +15,8 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 const isProd = process.env.NODE_ENV === 'production';
 
 app.use(express.json({ limit: '10mb' }));
+app.use('/images', express.static(path.resolve(__dirname, 'public/images')));
+app.use('/images', express.static(path.resolve(__dirname, 'images')));
 
 // Health check
 app.get('/api/health', (_req: Request, res: Response) => {

@@ -3,6 +3,7 @@ import { useStore } from '../context/StoreContext';
 import { ProductCard } from '../components/ProductCard';
 import { ArrowRight, ShieldCheck, Sparkles, Truck, Award, MapPin, Phone } from 'lucide-react';
 import { SEO } from '../components/SEO';
+import { handleImageError } from '../utils/images';
 
 export const HomeView: React.FC = () => {
   const { navigateTo, products, settings } = useStore();
@@ -15,7 +16,7 @@ export const HomeView: React.FC = () => {
       <SEO
         title="Royal Heritage & Contemporary Urban Menswear"
         description="Handcrafted African sartorial luxury, bespoke Senator attires, and heavyweight streetwear from Gbode Ventures Plaza, Lagos Island. Retail & wholesale bulk tiers."
-        image="/src/assets/images/hero_luxury_apparel_1793964581310.jpg"
+        image="/images/hero_luxury_apparel_1793964581310.jpg"
         type="website"
       />
       {/* Hero Section */}
@@ -23,10 +24,11 @@ export const HomeView: React.FC = () => {
         {/* Background Hero Image with Measured Scrim */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/hero_luxury_apparel_1793964581310.jpg"
+            src="/images/hero_luxury_apparel_1793964581310.jpg"
             alt="JB Lux Luxury Menswear"
             className="w-full h-full object-cover object-center"
             referrerPolicy="no-referrer"
+            onError={handleImageError}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
         </div>
@@ -189,10 +191,11 @@ export const HomeView: React.FC = () => {
           {/* Left Column: Image with guaranteed containment and matching height */}
           <div className="relative w-full min-h-[320px] sm:min-h-[400px] lg:min-h-full overflow-hidden bg-secondary">
             <img
-              src="/src/assets/images/store_lagos_flagship_1793964582670.jpg"
+              src="/images/store_lagos_flagship_1793964582670.jpg"
               alt="JB Lux Flagship Atelier Lagos Island"
               className="absolute inset-0 w-full h-full object-cover object-center"
               referrerPolicy="no-referrer"
+              onError={handleImageError}
             />
             <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-black/80 backdrop-blur-md rounded text-xs font-mono text-[#D4AF37] border border-[#D4AF37]/30">
               Gbode Ventures Plaza · Lagos Island

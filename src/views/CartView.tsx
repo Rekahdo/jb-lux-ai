@@ -2,6 +2,7 @@ import React from 'react';
 import { useStore } from '../context/StoreContext';
 import { Trash2, ShoppingBag, ArrowRight, ArrowLeft, ShieldCheck, Tag } from 'lucide-react';
 import { SEO } from '../components/SEO';
+import { getImageSrc, handleImageError } from '../utils/images';
 
 export const CartView: React.FC = () => {
   const {
@@ -81,10 +82,11 @@ export const CartView: React.FC = () => {
               >
                 {/* Image */}
                 <img
-                  src={item.image}
+                  src={getImageSrc(item.image)}
                   alt={item.name}
                   className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg bg-secondary/50 shrink-0"
                   referrerPolicy="no-referrer"
+                  onError={handleImageError}
                 />
 
                 {/* Details */}

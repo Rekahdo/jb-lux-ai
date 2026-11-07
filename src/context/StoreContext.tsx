@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Product, CartItem, Order, StoreSettings, UserProfile, OrderStatus } from '../types';
 import { INITIAL_PRODUCTS, INITIAL_SETTINGS, INITIAL_ORDERS, INITIAL_USER } from '../data/mockData';
+import { getImageSrc } from '../utils/images';
 
 export interface EmailNotification {
   id: string;
@@ -116,7 +117,20 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [products, setProducts] = useState<Product[]>(() => {
     try {
       const saved = localStorage.getItem('jblux_products');
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed: Product[] = JSON.parse(saved);
+        return parsed.map(p => {
+          // If product matches canonical INITIAL_PRODUCTS, ensure latest public images are used
+          const canonical = INITIAL_PRODUCTS.find(cp => cp.id === p.id || cp.slug === p.slug);
+          const images = canonical
+            ? canonical.images
+            : (p.images && p.images.length > 0 ? p.images.map(img => getImageSrc(img)) : ['/images/product_urban_bomber_1793964581140.jpg']);
+          return {
+            ...p,
+            images,
+          };
+        });
+      }
     } catch (e) {
       console.error(e);
     }
@@ -130,13 +144,24 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const addProduct = (productData: Omit<Product, 'id'>) => {
     const newProduct: Product = {
       ...productData,
+      images: productData.images.map(img => getImageSrc(img)),
       id: `prod-${Date.now()}`,
     };
     setProducts(prev => [newProduct, ...prev]);
   };
 
   const updateProduct = (id: string, updates: Partial<Product>) => {
-    setProducts(prev => prev.map(p => (p.id === id ? { ...p, ...updates } : p)));
+    setProducts(prev =>
+      prev.map(p =>
+        p.id === id
+          ? {
+              ...p,
+              ...updates,
+              images: updates.images ? updates.images.map(img => getImageSrc(img)) : p.images,
+            }
+          : p
+      )
+    );
   };
 
   const deleteProduct = (id: string) => {
@@ -232,7 +257,13 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
       const saved = localStorage.getItem('jblux_cart');
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed: CartItem[] = JSON.parse(saved);
+        return parsed.map(item => ({
+          ...item,
+          image: getImageSrc(item.image),
+        }));
+      }
     } catch (e) {
       console.error(e);
     }
@@ -295,7 +326,7 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
           id: itemId,
           productId: product.id,
           name: product.name,
-          image: product.images[0] || '',
+          image: getImageSrc(product.images[0] || ''),
           size,
           color,
           quantity: newQty,
@@ -354,7 +385,16 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [orders, setOrders] = useState<Order[]>(() => {
     try {
       const saved = localStorage.getItem('jblux_orders');
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed: Order[] = JSON.parse(saved);
+        return parsed.map(ord => ({
+          ...ord,
+          items: ord.items.map(item => ({
+            ...item,
+            image: getImageSrc(item.image),
+          })),
+        }));
+      }
     } catch (e) {
       console.error(e);
     }

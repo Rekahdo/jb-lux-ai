@@ -3,6 +3,7 @@ import { useStore } from '../context/StoreContext';
 import { Product } from '../types';
 import { ArrowLeft, ShoppingBag, Check, ShieldCheck, MapPin, Truck, Sparkles } from 'lucide-react';
 import { SEO } from '../components/SEO';
+import { getImageSrc, handleImageError } from '../utils/images';
 
 export const ProductDetailView: React.FC = () => {
   const { routeParams, navigateTo, products, addToCart } = useStore();
@@ -56,7 +57,7 @@ export const ProductDetailView: React.FC = () => {
       <SEO
         title={product.name}
         description={`${product.tagline}. ${product.description.slice(0, 150)}`}
-        image={product.images[0]}
+        image={getImageSrc(product.images[0])}
         type="product"
         slug={product.slug}
         price={currentUnitPrice}
@@ -78,9 +79,10 @@ export const ProductDetailView: React.FC = () => {
         <div className="lg:col-span-7 space-y-4">
           <div className="relative aspect-[4/3] bg-secondary/40 rounded-xl overflow-hidden border border-border">
             <img
-              src={selectedImage || product.images[0]}
+              src={getImageSrc(selectedImage || product.images[0])}
               alt={product.name}
               referrerPolicy="no-referrer"
+              onError={handleImageError}
               className="w-full h-full object-cover"
             />
             {product.isFeatured && (
@@ -98,10 +100,17 @@ export const ProductDetailView: React.FC = () => {
                   key={i}
                   onClick={() => setSelectedImage(img)}
                   className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                    selectedImage === img ? 'border-primary ring-2 ring-primary/20' : 'border-border opacity-70 hover:opacity-100'
+                    (selectedImage === img || getImageSrc(selectedImage) === getImageSrc(img))
+                      ? 'border-primary ring-2 ring-primary/20'
+                      : 'border-border opacity-70 hover:opacity-100'
                   }`}
                 >
-                  <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-cover" />
+                  <img
+                    src={getImageSrc(img)}
+                    alt={`View ${i + 1}`}
+                    onError={handleImageError}
+                    className="w-full h-full object-cover"
+                  />
                 </button>
               ))}
             </div>

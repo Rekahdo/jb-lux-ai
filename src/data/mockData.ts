@@ -24,8 +24,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: 'Masterfully structured bespoke Senator outfit crafted from ultra-fine Italian wool blend, complemented with solid gold-brushed heraldic buttons and precision hand-stitched cuffs.',
     fullDescription: 'An iconic silhouette for high-profile ceremonies, diplomatic galas, and discerning gentlemen. Designed and hand-cut at our Lagos Island atelier in Gbode Ventures Plaza. Features crisp hidden placket, contoured shoulder pads, and tailored slim-tapered trousers.',
     images: [
-      '/src/assets/images/product_senator_suit_1793964581978.jpg',
-      '/src/assets/images/hero_luxury_apparel_1793964581310.jpg',
+      '/images/product_senator_suit_1793964581978.jpg',
+      '/images/hero_luxury_apparel_1793964581310.jpg',
     ],
     retailPrice: 145000,
     wholesaleTiers: [
@@ -50,8 +50,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: 'Architectural streetwear outerwear featuring Japanese matte satin, chunky double-ended custom brass zippers, and high-density gold embroidery on chest and sleeve pocket.',
     fullDescription: 'The pinnacle of Lagos urban high-fashion. Breathable micro-quilted luxury viscose lining ensures effortless comfort in both tropical climates and air-conditioned lounges. Reinforced ribbed collar and storm flap.',
     images: [
-      '/src/assets/images/product_urban_bomber_1793964581140.jpg',
-      '/src/assets/images/hero_luxury_apparel_1793964581310.jpg',
+      '/images/product_urban_bomber_1793964581140.jpg',
+      '/images/hero_luxury_apparel_1793964581310.jpg',
     ],
     retailPrice: 85000,
     wholesaleTiers: [
@@ -76,8 +76,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: 'Ultra-heavyweight urban silhouette cut from combed Egyptian cotton. Emblazoned with scratch-resistant metallic gold foil lettering and engraved brass aglet drawstrings.',
     fullDescription: 'Engineered for modern streetwear connoisseurs. Features an oversized double-layered hood without exposed eyelets, seamless kangaroo pocket with concealed headphone port, and 2x2 ribbed side stretch gussets.',
     images: [
-      '/src/assets/images/product_oversized_hoodie_1793964582212.jpg',
-      '/src/assets/images/product_urban_bomber_1793964581140.jpg',
+      '/images/product_oversized_hoodie_1793964582212.jpg',
+      '/images/product_urban_bomber_1793964581140.jpg',
     ],
     retailPrice: 52000,
     wholesaleTiers: [
@@ -102,8 +102,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: 'Exquisite evening wear cut with sculpted British chest canvas and Milanese buttonhole. Features genuine horn buttons and gold jacquard lining.',
     fullDescription: 'Designed for high-stake red carpets and celebratory banquets. Matches effortlessly with slim tuxedo trousers or tailored denim for a daring contemporary high-low look.',
     images: [
-      '/src/assets/images/hero_luxury_apparel_1793964581310.jpg',
-      '/src/assets/images/product_senator_suit_1793964581978.jpg',
+      '/images/hero_luxury_apparel_1793964581310.jpg',
+      '/images/product_senator_suit_1793964581978.jpg',
     ],
     retailPrice: 165000,
     wholesaleTiers: [
@@ -128,7 +128,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: 'Clean streetwear essential crafted with drop shoulders, high neck ribbing, and 24k-sheen gold thread micro embroidery.',
     fullDescription: 'Pre-shrunk, garment-washed organic cotton that drapes impeccably. Ideal for wholesale boutique resale and daily urban elevation.',
     images: [
-      '/src/assets/images/product_oversized_hoodie_1793964582212.jpg',
+      '/images/product_oversized_hoodie_1793964582212.jpg',
     ],
     retailPrice: 28000,
     wholesaleTiers: [
@@ -153,8 +153,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: 'Flowing grand ceremonial robe, inner tailored tunic, and sokoto trousers. Showcases over 36 hours of hand-guided metallic bullion embroidery.',
     fullDescription: 'The pinnacle of West African regal elegance. Worn by leaders, visionaries, and trendsetters across Africa and the global diaspora.',
     images: [
-      '/src/assets/images/hero_luxury_apparel_1793964581310.jpg',
-      '/src/assets/images/product_senator_suit_1793964581978.jpg',
+      '/images/hero_luxury_apparel_1793964581310.jpg',
+      '/images/product_senator_suit_1793964581978.jpg',
     ],
     retailPrice: 240000,
     wholesaleTiers: [
@@ -179,7 +179,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: '35mm genuine vegetable-tanned calfskin belt with reversible black-to-cognac edge and heavy gold-finished signature buckle.',
     fullDescription: 'A timeless accessory built to patina gracefully over decades. Packaged in a velvet-lined magnetic gift case with certificate of authenticity.',
     images: [
-      '/src/assets/images/product_senator_suit_1793964581978.jpg',
+      '/images/product_senator_suit_1793964581978.jpg',
     ],
     retailPrice: 38000,
     wholesaleTiers: [
@@ -204,7 +204,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     description: 'Sleek menswear carryall designed to house an 11-inch iPad Pro, documents, cardholder, and smartphone in structured elegance.',
     fullDescription: 'Constructed with scratch-proof pebbled calf leather, internal microfibre suede compartments, and a detachable leather wristlet.',
     images: [
-      '/src/assets/images/hero_luxury_apparel_1793964581310.jpg',
+      '/images/hero_luxury_apparel_1793964581310.jpg',
     ],
     retailPrice: 58000,
     wholesaleTiers: [
@@ -250,7 +250,7 @@ export const INITIAL_ORDERS: Order[] = [
       {
         productId: 'prod-001',
         name: 'Aurum Monarch Senator Suit',
-        image: '/src/assets/images/product_senator_suit_1793964581978.jpg',
+        image: '/images/product_senator_suit_1793964581978.jpg',
         size: '42R (L)',
         color: 'Onyx Black',
         qty: 1,
@@ -261,7 +261,7 @@ export const INITIAL_ORDERS: Order[] = [
       {
         productId: 'prod-002',
         name: 'Imperium Gold Crest Bomber Jacket',
-        image: '/src/assets/images/product_urban_bomber_1793964581140.jpg',
+        image: '/images/product_urban_bomber_1793964581140.jpg',
         size: 'L',
         color: 'Jet Black with Gold Hardware',
         qty: 1,
@@ -306,7 +306,7 @@ export const INITIAL_ORDERS: Order[] = [
       {
         productId: 'prod-003',
         name: 'Illicit Luxury Streetwear Hoodie',
-        image: '/src/assets/images/product_oversized_hoodie_1793964582212.jpg',
+        image: '/images/product_oversized_hoodie_1793964582212.jpg',
         size: 'L',
         color: 'Obsidian Black',
         qty: 30,

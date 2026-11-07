@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { getImageSrc } from '../utils/images';
 
 export interface SEOProps {
   title?: string;
@@ -30,11 +31,11 @@ export const SEO: React.FC<SEOProps> = ({
   const defaultTitle = `${siteName} | Luxury Urban Apparel & Menswear`;
   const defaultDescription =
     'Premium clothing brand offering stylish urban apparel and menswear in wholesale and retail. Gbode Ventures Plaza, Nnamdi Azikiwe St, Lagos Island, Nigeria.';
-  const defaultImage = '/src/assets/images/hero_luxury_apparel_1793964581310.jpg';
+  const defaultImage = '/images/hero_luxury_apparel_1793964581310.jpg';
 
   const fullTitle = title ? `${title} | ${siteName}` : defaultTitle;
   const metaDescription = description || defaultDescription;
-  const ogImage = image || defaultImage;
+  const ogImage = getImageSrc(image || defaultImage);
 
   // Resolve absolute URL where possible using VITE_APP_URL or window.location.origin
   const currentOrigin =

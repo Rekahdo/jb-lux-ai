@@ -16,6 +16,7 @@ import {
 import { IncompleteProfileModal } from '../components/IncompleteProfileModal';
 import { AuthModal } from '../components/AuthModal';
 import { SEO } from '../components/SEO';
+import { getImageSrc, handleImageError } from '../utils/images';
 
 export const CheckoutView: React.FC = () => {
   const {
@@ -388,10 +389,11 @@ export const CheckoutView: React.FC = () => {
                 <div key={item.id} className="flex items-center justify-between text-xs py-1.5 border-b border-border/50">
                   <div className="flex items-center gap-2.5">
                     <img
-                      src={item.image}
+                      src={getImageSrc(item.image)}
                       alt={item.name}
                       className="w-10 h-10 object-cover rounded bg-secondary"
                       referrerPolicy="no-referrer"
+                      onError={handleImageError}
                     />
                     <div>
                       <p className="font-semibold text-foreground line-clamp-1">{item.name}</p>
