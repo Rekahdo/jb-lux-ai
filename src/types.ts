@@ -1,4 +1,11 @@
-export type ProductCategory = 'menswear' | 'streetwear' | 'traditional' | 'accessories';
+export type ProductCategory =
+  | 'menswear'
+  | 'womenswear'
+  | 'unisex'
+  | 'tailoring'
+  | 'streetwear'
+  | 'traditional'
+  | 'accessories';
 
 export interface WholesaleTier {
   minQty: number;
@@ -11,6 +18,7 @@ export interface Product {
   name: string;
   tagline: string;
   category: ProductCategory;
+  gender?: 'unisex' | 'men' | 'women';
   description: string;
   fullDescription: string;
   images: string[];

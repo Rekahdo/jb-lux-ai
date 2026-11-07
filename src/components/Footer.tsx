@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-sm text-[#A1A1AA] leading-relaxed max-w-sm">
-              Distinctive Nigerian contemporary luxury & urban menswear. Direct atelier craftsmanship, tailored sartorial elegance, and wholesale distribution from Lagos Island to the global stage.
+              Distinctive Nigerian contemporary luxury & unisex streetwear. Direct atelier craftsmanship, tailored sartorial elegance, and wholesale distribution for men and women from Lagos Island to the global stage.
             </p>
             <div className="pt-2 text-xs text-[#A1A1AA] flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
                   onClick={() => navigateTo('catalog')}
                   className="hover:text-[#D4AF37] transition-colors"
                 >
-                  All Menswear & Streetwear
+                  All Collections & Unisex Streetwear
                 </button>
               </li>
               <li>

@@ -15,9 +15,9 @@ export const SocialPreviewModal: React.FC<SocialPreviewModalProps> = ({ isOpen, 
   if (!isOpen) return null;
 
   // Resolve current dynamic title, description, and image based on route
-  let pageTitle = 'JB Lux Enterprises | Luxury Urban Apparel & Menswear';
+  let pageTitle = 'JB Lux Enterprises | Luxury Urban & Unisex Apparel (Men & Women)';
   let pageDesc =
-    'Premium clothing brand offering stylish urban apparel and menswear in wholesale and retail. Gbode Ventures Plaza, Nnamdi Azikiwe St, Lagos Island, Nigeria.';
+    'Premium Nigerian fashion brand offering stylish urban apparel, bespoke tailoring, and unisex streetwear for men and women in wholesale and retail. Gbode Ventures Plaza, Nnamdi Azikiwe St, Lagos Island, Nigeria.';
   let pageImage = '/images/hero_luxury_apparel_1793964581310.jpg';
 
   if (currentRoute === 'catalog') {

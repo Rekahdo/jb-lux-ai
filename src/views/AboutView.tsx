@@ -10,8 +10,8 @@ export const AboutView: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
       <SEO
-        title="Lagos Island Flagship Studio & Atelier Heritage"
-        description="Experience JB Lux at Gbode Ventures Plaza, Nnamdi Azikiwe Street, Lagos Island. Master-tailored urban luxury, bespoke ceremonial Senator attire, and wholesale production."
+        title="Lagos Island Flagship Studio & Atelier Heritage | Men & Women"
+        description="Experience JB Lux at Gbode Ventures Plaza, Nnamdi Azikiwe Street, Lagos Island. Master-tailored urban luxury, bespoke ceremonial attire, and wholesale production for men and women."
         image="/images/store_lagos_flagship_1793964582670.jpg"
         type="website"
       />
@@ -21,10 +21,10 @@ export const AboutView: React.FC = () => {
           Brand Heritage & Craftsmanship
         </span>
         <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground leading-tight">
-          Crafting Nigeria’s Defining Contemporary Luxury & Urban Menswear
+          Crafting Nigeria’s Defining Contemporary Luxury & Unisex Apparel
         </h1>
         <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-          Founded on Lagos Island, JB Lux Enterprises embodies the bold, unapologetic ambition of contemporary African style. From bespoke ceremonial Senator suits to heavy-weight luxury streetwear, each piece is engineered for presence, permanence, and prestige.
+          Founded on Lagos Island, JB Lux Enterprises embodies the bold, unapologetic ambition of contemporary African style. From bespoke ceremonial Senator suits and tailored silhouettes to heavy-weight luxury streetwear designed for both men and women, each piece is engineered for presence, permanence, and prestige.
         </p>
       </div>
 

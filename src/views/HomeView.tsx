@@ -14,8 +14,8 @@ export const HomeView: React.FC = () => {
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
       <SEO
-        title="Royal Heritage & Contemporary Urban Menswear"
-        description="Handcrafted African sartorial luxury, bespoke Senator attires, and heavyweight streetwear from Gbode Ventures Plaza, Lagos Island. Retail & wholesale bulk tiers."
+        title="Royal Heritage & Contemporary Urban Apparel | Men & Women"
+        description="Handcrafted African sartorial luxury, bespoke Senator attires, and heavyweight unisex streetwear from Gbode Ventures Plaza, Lagos Island. Retail & wholesale bulk tiers for men and women."
         image="/images/hero_luxury_apparel_1793964581310.jpg"
         type="website"
       />
@@ -25,7 +25,7 @@ export const HomeView: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img
             src="/images/hero_luxury_apparel_1793964581310.jpg"
-            alt="JB Lux Luxury Menswear"
+            alt="JB Lux Luxury Apparel for Men and Women"
             className="w-full h-full object-cover object-center"
             referrerPolicy="no-referrer"
             onError={handleImageError}
@@ -37,15 +37,15 @@ export const HomeView: React.FC = () => {
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center text-white space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-primary/40 text-primary text-xs font-mono tracking-widest uppercase">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Lagos Island Bespoke Sartorial Luxury</span>
+            <span>Lagos Island Bespoke Tailoring & Unisex Streetwear</span>
           </div>
 
           <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] max-w-4xl mx-auto text-balance">
-            Where Royal Heritage Meets Contemporary Urban Menswear
+            Where Royal Heritage Meets Contemporary Urban Apparel
           </h1>
 
           <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto font-light leading-relaxed">
-            Crafted at Gbode Ventures Plaza, Lagos Island. Tailored Senator attires, heavyweight luxury streetwear, and sartorial tuxedos available in single bespoke retail and high-volume wholesale tiers.
+            Crafted at Gbode Ventures Plaza, Lagos Island. Tailored Senator attires, heavyweight luxury unisex streetwear, and sartorial silhouettes engineered for men and women of distinction. Available in single retail and high-volume wholesale tiers.
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -214,7 +214,7 @@ export const HomeView: React.FC = () => {
             </div>
 
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Located in the heart of Lagos Island's historic mercantile district on Nnamdi Azikiwe Street, JB Lux Enterprises crafts premium urban streetwear and traditional menswear with world-class precision.
+              Located in the heart of Lagos Island's historic mercantile district on Nnamdi Azikiwe Street, JB Lux Enterprises crafts premium unisex streetwear and bespoke tailoring for men and women with world-class precision.
             </p>
 
             <div className="space-y-3 border-y border-border py-4 text-xs">
