@@ -26,8 +26,8 @@ export const SEO: React.FC<SEOProps> = ({
   category,
   structuredData,
 }) => {
-  const siteName = 'JB Lux Enterprises';
-  const defaultTitle = 'JB Lux Enterprises | Luxury Urban Apparel & Menswear';
+  const siteName = import.meta.env.VITE_STORE_NAME || 'JB Lux Enterprises';
+  const defaultTitle = `${siteName} | Luxury Urban Apparel & Menswear`;
   const defaultDescription =
     'Premium clothing brand offering stylish urban apparel and menswear in wholesale and retail. Gbode Ventures Plaza, Nnamdi Azikiwe St, Lagos Island, Nigeria.';
   const defaultImage = '/src/assets/images/hero_luxury_apparel_1793964581310.jpg';
@@ -36,8 +36,10 @@ export const SEO: React.FC<SEOProps> = ({
   const metaDescription = description || defaultDescription;
   const ogImage = image || defaultImage;
 
-  // Resolve absolute URL where possible
-  const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://jbluxenterprises.com';
+  // Resolve absolute URL where possible using VITE_APP_URL or window.location.origin
+  const currentOrigin =
+    import.meta.env.VITE_APP_URL ||
+    (typeof window !== 'undefined' ? window.location.origin : 'https://jbluxenterprises.com');
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
   const canonicalUrl = `${currentOrigin}${currentPath}${slug ? `#${slug}` : ''}`;
   const absoluteImageUrl = ogImage.startsWith('http') ? ogImage : `${currentOrigin}${ogImage}`;

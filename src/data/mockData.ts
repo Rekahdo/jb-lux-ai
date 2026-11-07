@@ -1,15 +1,15 @@
 import { Product, StoreSettings, Order, UserProfile } from '../types';
 
 export const INITIAL_SETTINGS: StoreSettings = {
-  bankName: 'Zenith Bank PLC',
-  accountName: 'JB LUX ENTERPRISES',
-  accountNumber: '1018934522',
+  bankName: import.meta.env.VITE_DEFAULT_BANK_NAME || 'Zenith Bank PLC',
+  accountName: import.meta.env.VITE_DEFAULT_ACCOUNT_NAME || 'JB LUX ENTERPRISES',
+  accountNumber: import.meta.env.VITE_DEFAULT_ACCOUNT_NUMBER || '1018934522',
   bankBranch: 'Lagos Island Commercial Branch',
   transferInstructions: 'Please make a direct transfer of the exact order total into our official account. Upload a clear digital receipt, mobile banking screenshot, or transaction PDF to finalize your order verification.',
   storeAddress: 'Gbode Ventures Plaza, Nnamdi Azikiwe Street, Lagos Island, Lagos, Nigeria',
-  contactEmail: 'realjblux@gmail.com',
-  contactPhone: '+234 906 124 0069',
-  whatsappNumber: '+2349061240069',
+  contactEmail: import.meta.env.VITE_STORE_EMAIL || 'realjblux@gmail.com',
+  contactPhone: import.meta.env.VITE_STORE_PHONE || '+234 906 124 0069',
+  whatsappNumber: import.meta.env.VITE_WHATSAPP_NUMBER || '+2349061240069',
   freeShippingWholesaleMin: 500000, // ₦500,000
   updatedAt: new Date().toISOString(),
 };

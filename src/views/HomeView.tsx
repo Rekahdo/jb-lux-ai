@@ -185,20 +185,22 @@ export const HomeView: React.FC = () => {
 
       {/* Lagos Island Flagship Atelier Showcase */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-card border border-border rounded-2xl overflow-hidden">
-          <div className="lg:col-span-6 relative aspect-[16/10] lg:h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 bg-card border border-border rounded-2xl overflow-hidden items-stretch shadow-sm">
+          {/* Left Column: Image with guaranteed containment and matching height */}
+          <div className="relative w-full min-h-[320px] sm:min-h-[400px] lg:min-h-full overflow-hidden bg-secondary">
             <img
               src="/src/assets/images/store_lagos_flagship_1793964582670.jpg"
               alt="JB Lux Flagship Atelier Lagos Island"
-              className="w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover object-center"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute top-4 left-4 px-3 py-1 bg-black/80 backdrop-blur-md rounded text-xs font-mono text-[#D4AF37] border border-[#D4AF37]/30">
+            <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-black/80 backdrop-blur-md rounded text-xs font-mono text-[#D4AF37] border border-[#D4AF37]/30">
               Gbode Ventures Plaza · Lagos Island
             </div>
           </div>
 
-          <div className="lg:col-span-6 p-8 lg:p-12 space-y-6">
+          {/* Right Column: Content with generous padding and vertical alignment */}
+          <div className="p-8 sm:p-10 lg:p-12 space-y-6 flex flex-col justify-center">
             <div className="space-y-2">
               <span className="text-xs font-mono uppercase tracking-wider text-primary">
                 Atelier Heritage & Physical Store

@@ -147,7 +147,14 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [settings, setSettings] = useState<StoreSettings>(() => {
     try {
       const saved = localStorage.getItem('jblux_settings');
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Automatically adopt new bank account details if updated via .env
+        if (INITIAL_SETTINGS.bankName !== 'Zenith Bank PLC' && parsed.bankName === 'Zenith Bank PLC') {
+          return { ...parsed, ...INITIAL_SETTINGS };
+        }
+        return parsed;
+      }
     } catch (e) {
       console.error(e);
     }
@@ -537,6 +544,18 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     setSentEmails(prev => [emailNotif, ...prev]);
     setLatestEmail(emailNotif);
 
+    // Call backend Resend API to deliver live email
+    fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        to: newOrder.customer.email,
+        subject: emailNotif.subject,
+        htmlContent: emailNotif.htmlContent,
+        orderNumber: newOrder.orderNumber,
+      }),
+    }).catch(err => console.warn('[Resend Client Dispatch Notice]', err));
+
     return newOrder;
   };
 
@@ -581,6 +600,18 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
           setSentEmails(ePrev => [emailNotif, ...ePrev]);
           setLatestEmail(emailNotif);
+
+          // Dispatch status update email through Resend API
+          fetch('/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              to: updatedOrder.customer.email,
+              subject: emailNotif.subject,
+              htmlContent: emailNotif.htmlContent,
+              orderNumber: updatedOrder.orderNumber,
+            }),
+          }).catch(err => console.warn('[Resend Client Dispatch Notice]', err));
 
           return updatedOrder;
         }
