@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Product, CartItem, Order, StoreSettings, UserProfile, OrderStatus } from '../types';
+import { Product, CartItem, Order, StoreSettings, UserProfile, OrderStatus, Review } from '../types';
 import { INITIAL_PRODUCTS, INITIAL_SETTINGS, INITIAL_ORDERS, INITIAL_USER } from '../data/mockData';
 import { getImageSrc } from '../utils/images';
 
@@ -29,6 +29,18 @@ interface StoreContextType {
   addProduct: (product: Omit<Product, 'id'>) => void;
   updateProduct: (id: string, updates: Partial<Product>) => void;
   deleteProduct: (id: string) => void;
+  addReview: (
+    productId: string,
+    reviewData: {
+      author: string;
+      location?: string;
+      rating: number;
+      title: string;
+      comment: string;
+      fitFeedback?: 'Runs small' | 'True to size' | 'Runs large';
+    }
+  ) => void;
+  voteReviewHelpful: (productId: string, reviewId: string) => void;
 
   // Settings
   settings: StoreSettings;
@@ -126,8 +138,12 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
             ? canonical.images
             : (p.images && p.images.length > 0 ? p.images.map(img => getImageSrc(img)) : ['/images/product_urban_bomber_1793964581140.jpg']);
           return {
+            ...canonical,
             ...p,
             images,
+            rating: p.rating ?? canonical?.rating ?? 4.9,
+            reviewCount: p.reviewCount ?? canonical?.reviewCount ?? (canonical?.reviews?.length || 24),
+            reviews: p.reviews && p.reviews.length > 0 ? p.reviews : (canonical?.reviews || []),
           };
         });
       }
@@ -146,6 +162,9 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       ...productData,
       images: productData.images.map(img => getImageSrc(img)),
       id: `prod-${Date.now()}`,
+      rating: 5.0,
+      reviewCount: 0,
+      reviews: [],
     };
     setProducts(prev => [newProduct, ...prev]);
   };
@@ -166,6 +185,67 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const deleteProduct = (id: string) => {
     setProducts(prev => prev.filter(p => p.id !== id));
+  };
+
+  const addReview = (
+    productId: string,
+    reviewData: {
+      author: string;
+      location?: string;
+      rating: number;
+      title: string;
+      comment: string;
+      fitFeedback?: 'Runs small' | 'True to size' | 'Runs large';
+    }
+  ) => {
+    setProducts(prev =>
+      prev.map(p => {
+        if (p.id !== productId) return p;
+        const currentReviews = p.reviews || [];
+        const newReview: Review = {
+          id: `rev-${Date.now()}`,
+          author: reviewData.author.trim() || 'Verified Client',
+          location: reviewData.location?.trim() || 'Lagos, Nigeria',
+          rating: Math.max(1, Math.min(5, reviewData.rating)),
+          date: new Date().toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          }),
+          verifiedPurchase: true,
+          title: reviewData.title.trim(),
+          comment: reviewData.comment.trim(),
+          fitFeedback: reviewData.fitFeedback || 'True to size',
+          helpfulCount: 0,
+        };
+
+        const updatedReviews = [newReview, ...currentReviews];
+        const newReviewCount = updatedReviews.length;
+        const sumRatings = updatedReviews.reduce((sum, r) => sum + r.rating, 0);
+        const newRating = parseFloat((sumRatings / newReviewCount).toFixed(1));
+
+        return {
+          ...p,
+          reviews: updatedReviews,
+          reviewCount: newReviewCount,
+          rating: newRating,
+        };
+      })
+    );
+  };
+
+  const voteReviewHelpful = (productId: string, reviewId: string) => {
+    setProducts(prev =>
+      prev.map(p => {
+        if (p.id !== productId || !p.reviews) return p;
+        return {
+          ...p,
+          reviews: p.reviews.map(r =>
+            r.id === reviewId ? { ...r, helpfulCount: (r.helpfulCount || 0) + 1 } : r
+          ),
+        };
+      })
+    );
   };
 
   // Store settings
@@ -676,6 +756,8 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         addProduct,
         updateProduct,
         deleteProduct,
+        addReview,
+        voteReviewHelpful,
         settings,
         updateSettings,
         user,

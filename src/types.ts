@@ -12,6 +12,19 @@ export interface WholesaleTier {
   discountPercent: number; // e.g. 15 for 15% off
 }
 
+export interface Review {
+  id: string;
+  author: string;
+  location?: string;
+  rating: number; // 1 to 5
+  date: string;
+  verifiedPurchase: boolean;
+  title: string;
+  comment: string;
+  fitFeedback?: 'Runs small' | 'True to size' | 'Runs large';
+  helpfulCount?: number;
+}
+
 export interface Product {
   id: string;
   slug: string;
@@ -31,6 +44,9 @@ export interface Product {
   fabric: string;
   craftsmanshipOrigin: string;
   isFeatured?: boolean;
+  rating?: number;
+  reviewCount?: number;
+  reviews?: Review[];
 }
 
 export interface CartItem {

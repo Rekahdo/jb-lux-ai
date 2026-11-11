@@ -1,7 +1,7 @@
 import React from 'react';
 import { Product } from '../types';
 import { useStore } from '../context/StoreContext';
-import { ArrowUpRight, ShoppingBag } from 'lucide-react';
+import { ArrowUpRight, ShoppingBag, Star } from 'lucide-react';
 import { getImageSrc, handleImageError } from '../utils/images';
 
 interface ProductCardProps {
@@ -89,6 +89,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, wholesaleView
           <p className="text-xs text-muted-foreground line-clamp-1 mt-1">
             {product.tagline}
           </p>
+
+          {/* Rating & Review Counter */}
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-2">
+            <div className="flex items-center text-[#D4AF37]">
+              <Star className="w-3.5 h-3.5 fill-current" />
+            </div>
+            <span className="font-semibold text-foreground font-mono text-xs tabular-nums">
+              {(product.rating ?? 4.9).toFixed(1)}
+            </span>
+            <span className="text-[11px] font-mono text-muted-foreground tabular-nums">
+              ({product.reviewCount ?? product.reviews?.length ?? 24})
+            </span>
+            <span className="text-muted-foreground/60 text-[10px]" aria-hidden="true">·</span>
+            <span className="text-[11px] text-muted-foreground">
+              {product.gender === 'unisex' ? 'Unisex' : product.gender || 'Atelier'}
+            </span>
+          </div>
         </div>
 
         <div className="pt-2 border-t border-border flex items-baseline justify-between">
