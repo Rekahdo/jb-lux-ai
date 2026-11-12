@@ -131,8 +131,8 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       const saved = localStorage.getItem('jblux_products');
       if (saved) {
         const parsed: Product[] = JSON.parse(saved);
-        return parsed.map(p => {
-          // If product matches canonical INITIAL_PRODUCTS, ensure latest public images are used
+        const hydrated = parsed.map(p => {
+          // If product matches canonical INITIAL_PRODUCTS, ensure latest public images and properties are used
           const canonical = INITIAL_PRODUCTS.find(cp => cp.id === p.id || cp.slug === p.slug);
           const images = canonical
             ? canonical.images
@@ -146,6 +146,11 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
             reviews: p.reviews && p.reviews.length > 0 ? p.reviews : (canonical?.reviews || []),
           };
         });
+
+        // Append any canonical products not present in cache
+        const cachedIds = new Set(hydrated.map(p => p.id));
+        const missingCanonical = INITIAL_PRODUCTS.filter(cp => !cachedIds.has(cp.id));
+        return [...hydrated, ...missingCanonical];
       }
     } catch (e) {
       console.error(e);

@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { getImageSrc, handleImageError } from '../utils/images';
+import { ProductReviewsDrawer } from '../components/ProductReviewsDrawer';
 
 export const ProductDetailView: React.FC = () => {
   const { routeParams, navigateTo, products, addToCart, addReview, voteReviewHelpful, user } = useStore();
@@ -31,7 +32,8 @@ export const ProductDetailView: React.FC = () => {
   const [mode, setMode] = useState<'retail' | 'wholesale'>('retail');
   const [addedNotice, setAddedNotice] = useState(false);
 
-  // Reviews filtering, sorting & creation state
+  // Reviews filtering, sorting, side panel & creation state
+  const [isReviewsDrawerOpen, setIsReviewsDrawerOpen] = useState(false);
   const [starFilter, setStarFilter] = useState<'all' | number>('all');
   const [reviewSort, setReviewSort] = useState<'recent' | 'highest' | 'helpful'>('recent');
   const [showReviewForm, setShowReviewForm] = useState(false);
@@ -199,13 +201,11 @@ export const ProductDetailView: React.FC = () => {
               </span>
               <span className="text-muted-foreground/60 text-[10px]" aria-hidden="true">·</span>
               <button
-                onClick={() => {
-                  const el = document.getElementById('client-reviews-section');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors underline decoration-dotted underline-offset-4"
+                onClick={() => setIsReviewsDrawerOpen(true)}
+                className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors underline decoration-dotted underline-offset-4 flex items-center gap-1"
+                title="Open verified client reviews side panel"
               >
-                {product.reviewCount || product.reviews?.length || 24} Verified Client Reviews
+                <span>{product.reviewCount || product.reviews?.length || 24} Verified Client Reviews</span>
               </button>
             </div>
           </div>
@@ -441,13 +441,23 @@ export const ProductDetailView: React.FC = () => {
             </p>
           </div>
 
-          <button
-            onClick={() => setShowReviewForm(!showReviewForm)}
-            className="px-4 py-2.5 bg-primary text-black font-semibold text-xs rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2 self-start md:self-auto shadow-sm"
-          >
-            <PenTool className="w-3.5 h-3.5" />
-            <span>{showReviewForm ? 'Cancel Review' : 'Write a Review'}</span>
-          </button>
+          <div className="flex flex-wrap items-center gap-2.5 self-start md:self-auto">
+            <button
+              onClick={() => setIsReviewsDrawerOpen(true)}
+              className="px-4 py-2.5 bg-secondary hover:bg-secondary/80 border border-border text-foreground font-medium text-xs rounded-lg transition-colors flex items-center gap-2 shadow-sm"
+              title="Open full reviews ledger side panel"
+            >
+              <MessageSquare className="w-3.5 h-3.5 text-primary" />
+              <span>Open Side Panel ({product.reviews?.length || 0})</span>
+            </button>
+            <button
+              onClick={() => setShowReviewForm(!showReviewForm)}
+              className="px-4 py-2.5 bg-primary text-black font-semibold text-xs rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm"
+            >
+              <PenTool className="w-3.5 h-3.5" />
+              <span>{showReviewForm ? 'Cancel Review' : 'Drop a Review'}</span>
+            </button>
+          </div>
         </div>
 
         {/* Rating Breakdown Dashboard Card */}
@@ -778,111 +788,185 @@ export const ProductDetailView: React.FC = () => {
           </div>
         </div>
 
-        {/* Reviews List */}
-        <div className="space-y-4">
-          {(!product.reviews || product.reviews.length === 0) ? (
-            <div className="p-12 text-center bg-card border border-border rounded-xl space-y-2">
-              <MessageSquare className="w-8 h-8 text-muted-foreground/50 mx-auto" />
-              <p className="text-sm font-semibold text-foreground">Be the first to review this garment</p>
-              <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-                Leave your rating on craftsmanship, fabric drape, and bespoke fit fidelity.
-              </p>
-            </div>
-          ) : (
-            product.reviews
-              .filter(r => starFilter === 'all' || r.rating === starFilter)
-              .sort((a, b) => {
-                if (reviewSort === 'highest') return b.rating - a.rating;
-                if (reviewSort === 'helpful') return (b.helpfulCount || 0) - (a.helpfulCount || 0);
-                return new Date(b.date).getTime() - new Date(a.date).getTime();
-              })
-              .map(review => {
-                const hasVoted = Boolean(votedReviews[review.id]);
+        {/* Reviews List (Minimum 3 comments shown with side panel trigger) */}
+        {(() => {
+          const allFilteredReviews = (product.reviews || [])
+            .filter(r => starFilter === 'all' || r.rating === starFilter)
+            .sort((a, b) => {
+              if (reviewSort === 'highest') return b.rating - a.rating;
+              if (reviewSort === 'helpful') return (b.helpfulCount || 0) - (a.helpfulCount || 0);
+              return new Date(b.date).getTime() - new Date(a.date).getTime();
+            });
 
-                return (
-                  <div
-                    key={review.id}
-                    className="p-6 bg-card border border-border rounded-xl space-y-3 transition-colors hover:border-border/80"
+          const displayedReviews = allFilteredReviews.slice(0, 3);
+          const hasMoreThanThree = allFilteredReviews.length > 3;
+          const remainingCount = allFilteredReviews.length - 3;
+
+          return (
+            <div className="space-y-4">
+              {allFilteredReviews.length === 0 ? (
+                <div className="p-12 text-center bg-card border border-border rounded-xl space-y-2">
+                  <MessageSquare className="w-8 h-8 text-muted-foreground/50 mx-auto" />
+                  <p className="text-sm font-semibold text-foreground">Be the first to review this garment</p>
+                  <p className="text-xs text-muted-foreground max-w-sm mx-auto">
+                    Leave your rating on craftsmanship, fabric drape, and bespoke fit fidelity.
+                  </p>
+                  <button
+                    onClick={() => setShowReviewForm(true)}
+                    className="mt-2 px-4 py-2 bg-primary text-black font-semibold text-xs rounded-lg hover:opacity-90 transition-opacity inline-flex items-center gap-1.5 shadow-sm"
                   >
-                    {/* Header info */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/50 pb-3">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-foreground text-sm">{review.author}</span>
-                          {review.verifiedPurchase && (
-                            <span className="text-[10px] font-mono text-emerald-500 flex items-center gap-1">
-                              <ShieldCheck className="w-3 h-3" />
-                              <span>Verified Buyer</span>
-                            </span>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono text-[11px]">
-                          {review.location && <span>{review.location}</span>}
-                          {review.location && <span aria-hidden="true">·</span>}
-                          <span>{review.date}</span>
-                        </div>
-                      </div>
+                    <PenTool className="w-3.5 h-3.5" />
+                    <span>Drop First Review</span>
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {displayedReviews.map(review => {
+                    const hasVoted = Boolean(votedReviews[review.id]);
 
-                      {/* Stars & Fit badge */}
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center text-[#D4AF37]">
-                          {[1, 2, 3, 4, 5].map(star => (
-                            <Star
-                              key={star}
-                              className={`w-3.5 h-3.5 ${
-                                star <= review.rating ? 'fill-current text-[#D4AF37]' : 'text-border'
-                              }`}
-                            />
-                          ))}
+                    return (
+                      <div
+                        key={review.id}
+                        className="p-6 bg-card border border-border rounded-xl space-y-3 transition-colors hover:border-border/80"
+                      >
+                        {/* Header info */}
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/50 pb-3">
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-2">
+                              <span className="font-semibold text-foreground text-sm">{review.author}</span>
+                              {review.verifiedPurchase && (
+                                <span className="text-[10px] font-mono text-emerald-500 flex items-center gap-1">
+                                  <ShieldCheck className="w-3 h-3" />
+                                  <span>Verified Buyer</span>
+                                </span>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono text-[11px]">
+                              {review.location && <span>{review.location}</span>}
+                              {review.location && <span aria-hidden="true">·</span>}
+                              <span>{review.date}</span>
+                            </div>
+                          </div>
+
+                          {/* Stars & Fit badge */}
+                          <div className="flex items-center gap-3">
+                            <div className="flex items-center text-[#D4AF37]">
+                              {[1, 2, 3, 4, 5].map(star => (
+                                <Star
+                                  key={star}
+                                  className={`w-3.5 h-3.5 ${
+                                    star <= review.rating ? 'fill-current text-[#D4AF37]' : 'text-border'
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                            {review.fitFeedback && (
+                              <span className="text-[10px] font-mono px-2 py-0.5 bg-secondary text-foreground/80 rounded border border-border">
+                                Fit: {review.fitFeedback}
+                              </span>
+                            )}
+                          </div>
                         </div>
-                        {review.fitFeedback && (
-                          <span className="text-[10px] font-mono px-2 py-0.5 bg-secondary text-foreground/80 rounded border border-border">
-                            Fit: {review.fitFeedback}
+
+                        {/* Review Body */}
+                        <div className="space-y-1.5">
+                          <h4 className="font-semibold text-foreground text-sm">
+                            {review.title}
+                          </h4>
+                          <p className="text-xs text-muted-foreground leading-relaxed">
+                            {review.comment}
+                          </p>
+                        </div>
+
+                        {/* Helpful Action */}
+                        <div className="pt-2 flex items-center justify-between text-xs text-muted-foreground">
+                          <span className="text-[11px] font-mono text-muted-foreground/80">
+                            Atelier Certified Review
                           </span>
-                        )}
+
+                          <button
+                            onClick={() => {
+                              if (hasVoted) return;
+                              voteReviewHelpful(product.id, review.id);
+                              setVotedReviews(prev => ({ ...prev, [review.id]: true }));
+                            }}
+                            disabled={hasVoted}
+                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-mono transition-colors border ${
+                              hasVoted
+                                ? 'bg-emerald-950/40 text-emerald-400 border-emerald-800 cursor-default'
+                                : 'bg-secondary/60 text-muted-foreground hover:text-foreground border-border hover:bg-secondary'
+                            }`}
+                          >
+                            <ThumbsUp className="w-3 h-3" />
+                            <span>{hasVoted ? 'Marked Helpful' : 'Helpful'}</span>
+                            <span className="tabular-nums">({(review.helpfulCount || 0) + (hasVoted ? 1 : 0)})</span>
+                          </button>
+                        </div>
                       </div>
-                    </div>
+                    );
+                  })}
 
-                    {/* Review Body */}
-                    <div className="space-y-1.5">
-                      <h4 className="font-semibold text-foreground text-sm">
-                        {review.title}
-                      </h4>
-                      <p className="text-xs text-muted-foreground leading-relaxed">
-                        {review.comment}
-                      </p>
-                    </div>
-
-                    {/* Helpful Action */}
-                    <div className="pt-2 flex items-center justify-between text-xs text-muted-foreground">
-                      <span className="text-[11px] font-mono text-muted-foreground/80">
-                        Atelier Certified Review
-                      </span>
+                  {/* Show More Comments Trigger */}
+                  {hasMoreThanThree ? (
+                    <div className="p-5 bg-card border border-border/80 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm animate-in fade-in">
+                      <div className="space-y-0.5">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-foreground text-xs">
+                            Showing 3 of {allFilteredReviews.length} comments
+                          </span>
+                          <span className="text-[10px] font-mono px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 rounded font-bold">
+                            +{remainingCount} more in ledger
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Open the atelier ledger side panel to browse all verified client reviews, filter by rating, and read fit experiences.
+                        </p>
+                      </div>
 
                       <button
-                        onClick={() => {
-                          if (hasVoted) return;
-                          voteReviewHelpful(product.id, review.id);
-                          setVotedReviews(prev => ({ ...prev, [review.id]: true }));
-                        }}
-                        disabled={hasVoted}
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-mono transition-colors border ${
-                          hasVoted
-                            ? 'bg-emerald-950/40 text-emerald-400 border-emerald-800 cursor-default'
-                            : 'bg-secondary/60 text-muted-foreground hover:text-foreground border-border hover:bg-secondary'
-                        }`}
+                        onClick={() => setIsReviewsDrawerOpen(true)}
+                        className="px-5 py-2.5 bg-primary text-black font-semibold text-xs rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2 shrink-0 shadow-sm"
                       >
-                        <ThumbsUp className="w-3 h-3" />
-                        <span>{hasVoted ? 'Marked Helpful' : 'Helpful'}</span>
-                        <span className="tabular-nums">({(review.helpfulCount || 0) + (hasVoted ? 1 : 0)})</span>
+                        <MessageSquare className="w-3.5 h-3.5" />
+                        <span>Show More Comments ({remainingCount} more)</span>
+                        <span>→</span>
                       </button>
                     </div>
-                  </div>
-                );
-              })
-          )}
-        </div>
+                  ) : (
+                    <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground border-t border-border/40">
+                      <span className="font-mono text-[11px]">
+                        Showing all {allFilteredReviews.length} {allFilteredReviews.length === 1 ? 'comment' : 'comments'} matching filter
+                      </span>
+                      <button
+                        onClick={() => setIsReviewsDrawerOpen(true)}
+                        className="font-mono text-[11px] text-primary hover:underline flex items-center gap-1"
+                      >
+                        <span>Open Atelier Ledger Side Panel</span>
+                        <span>→</span>
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          );
+        })()}
       </section>
+
+      {/* Reviews Side Panel Drawer */}
+      <ProductReviewsDrawer
+        isOpen={isReviewsDrawerOpen}
+        onClose={() => setIsReviewsDrawerOpen(false)}
+        product={product}
+        onAddReview={addReview}
+        onVoteHelpful={(productId, reviewId) => {
+          voteReviewHelpful(productId, reviewId);
+          setVotedReviews(prev => ({ ...prev, [reviewId]: true }));
+        }}
+        votedReviews={votedReviews}
+        userName={user?.name}
+        userCity={user?.city}
+      />
     </div>
   );
 };

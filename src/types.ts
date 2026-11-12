@@ -36,6 +36,10 @@ export interface Product {
   fullDescription: string;
   images: string[];
   retailPrice: number; // in NGN (₦)
+  originalPrice?: number; // for strikethrough comparison price
+  isSale?: boolean;
+  badge?: string;
+  subCategory?: string;
   wholesaleTiers: WholesaleTier[];
   stock: number;
   isActive: boolean;
