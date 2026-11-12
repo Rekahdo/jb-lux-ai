@@ -75,64 +75,64 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, wholesaleView
       </div>
 
       {/* Card Details */}
-      <div className="p-4 flex flex-col flex-1 justify-between gap-3">
+      <div className="p-3 sm:p-4 flex flex-col flex-1 justify-between gap-2.5 sm:gap-3">
         <div>
-          <div className="flex items-center justify-between text-xs text-muted-foreground uppercase tracking-wider mb-1">
-            <span>{product.category}</span>
-            <span className="font-mono text-[11px]">{product.stock} in stock</span>
+          <div className="flex items-center justify-between text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider mb-1">
+            <span className="truncate max-w-[60%]">{product.category}</span>
+            <span className="font-mono text-[10px] sm:text-[11px] shrink-0">{product.stock} in stock</span>
           </div>
 
-          <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-1 text-base">
+          <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-1 text-xs sm:text-base">
             {product.name}
           </h3>
 
-          <p className="text-xs text-muted-foreground line-clamp-1 mt-1">
+          <p className="text-[11px] sm:text-xs text-muted-foreground line-clamp-1 mt-0.5 sm:mt-1">
             {product.tagline}
           </p>
 
           {/* Rating & Review Counter */}
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-2">
+          <div className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs text-muted-foreground mt-1.5 sm:mt-2">
             <div className="flex items-center text-[#D4AF37]">
-              <Star className="w-3.5 h-3.5 fill-current" />
+              <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" />
             </div>
-            <span className="font-semibold text-foreground font-mono text-xs tabular-nums">
+            <span className="font-semibold text-foreground font-mono text-[11px] sm:text-xs tabular-nums">
               {(product.rating ?? 4.9).toFixed(1)}
             </span>
-            <span className="text-[11px] font-mono text-muted-foreground tabular-nums">
+            <span className="text-[10px] sm:text-[11px] font-mono text-muted-foreground tabular-nums">
               ({product.reviewCount ?? product.reviews?.length ?? 24})
             </span>
             <span className="text-muted-foreground/60 text-[10px]" aria-hidden="true">·</span>
-            <span className="text-[11px] text-muted-foreground">
+            <span className="text-[10px] sm:text-[11px] text-muted-foreground truncate">
               {product.gender === 'unisex' ? 'Unisex' : product.gender || 'Atelier'}
             </span>
           </div>
         </div>
 
-        <div className="pt-2 border-t border-border flex items-baseline justify-between">
+        <div className="pt-2 border-t border-border flex items-baseline justify-between gap-1">
           <div>
             {wholesaleView && maxDiscount > 0 ? (
               <div>
-                <span className="text-xs text-muted-foreground line-through font-mono mr-2">
+                <span className="text-[10px] sm:text-xs text-muted-foreground line-through font-mono mr-1.5">
                   ₦{product.retailPrice.toLocaleString()}
                 </span>
-                <span className="text-base font-bold text-primary font-mono tabular-nums">
+                <span className="text-xs sm:text-base font-bold text-primary font-mono tabular-nums block sm:inline">
                   from ₦{lowestWholesalePrice.toLocaleString()}
                 </span>
-                <p className="text-[10px] text-muted-foreground font-mono">
+                <p className="text-[9px] sm:text-[10px] text-muted-foreground font-mono">
                   Bulk order pricing
                 </p>
               </div>
             ) : (
               <div>
-                <span className="text-base font-bold text-foreground font-mono tabular-nums">
+                <span className="text-xs sm:text-base font-bold text-foreground font-mono tabular-nums">
                   ₦{product.retailPrice.toLocaleString()}
                 </span>
-                <span className="text-[11px] text-muted-foreground ml-2">Retail</span>
+                <span className="text-[10px] sm:text-[11px] text-muted-foreground ml-1.5 hidden sm:inline">Retail</span>
               </div>
             )}
           </div>
 
-          <span className="text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors flex items-center">
+          <span className="text-[11px] sm:text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors flex items-center shrink-0">
             Details &rarr;
           </span>
         </div>

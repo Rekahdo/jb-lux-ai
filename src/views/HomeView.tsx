@@ -394,8 +394,8 @@ export const HomeView: React.FC = () => {
           </div>
         </div>
 
-        {/* 4-column Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 4-column Product Grid (2 cols on mobile) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {featuredProducts.map(product => (
             <ProductCard key={product.id} product={product} wholesaleView={wholesaleMode} />
           ))}
@@ -436,8 +436,8 @@ export const HomeView: React.FC = () => {
           </div>
         </div>
 
-        {/* 4-Column Popular Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 4-Column Popular Grid (2 cols on mobile) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {displayPopular.map(product => {
             const hasSale = Boolean(product.isSale || product.originalPrice);
             const originalPrice = product.originalPrice || Math.round(product.retailPrice * 1.35);
@@ -460,65 +460,65 @@ export const HomeView: React.FC = () => {
                   />
 
                   {/* Badges Overlay */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-1 items-start">
+                  <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 flex flex-col gap-1 items-start">
                     {hasSale && (
-                      <span className="text-[10px] font-mono font-bold tracking-wider uppercase px-2 py-0.5 bg-red-600 text-white rounded shadow-sm">
+                      <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-wider uppercase px-1.5 sm:px-2 py-0.5 bg-red-600 text-white rounded shadow-sm">
                         SALE
                       </span>
                     )}
-                    <span className="text-[10px] font-mono tracking-wider uppercase px-2 py-0.5 bg-black/80 backdrop-blur-md text-[#D4AF37] border border-[#D4AF37]/30 rounded">
+                    <span className="text-[9px] sm:text-[10px] font-mono tracking-wider uppercase px-1.5 sm:px-2 py-0.5 bg-black/80 backdrop-blur-md text-[#D4AF37] border border-[#D4AF37]/30 rounded truncate max-w-[110px] sm:max-w-none">
                       {categoryLabel}
                     </span>
                   </div>
 
                   {/* Stock counter */}
-                  <div className="absolute top-3 right-3 text-[10px] font-mono px-2 py-0.5 bg-black/60 backdrop-blur-md text-white/90 rounded">
-                    {product.stock} in stock
+                  <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 bg-black/60 backdrop-blur-md text-white/90 rounded">
+                    {product.stock} left
                   </div>
                 </div>
 
                 {/* Body Details */}
-                <div className="p-5 flex flex-col flex-1 justify-between gap-4">
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <div className="p-3 sm:p-5 flex flex-col flex-1 justify-between gap-2.5 sm:gap-4">
+                  <div className="space-y-1 sm:space-y-1.5">
+                    <div className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs text-muted-foreground">
                       <div className="flex items-center text-[#D4AF37]">
-                        <Star className="w-3.5 h-3.5 fill-current" />
+                        <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" />
                       </div>
-                      <span className="font-semibold text-foreground font-mono text-xs tabular-nums">
+                      <span className="font-semibold text-foreground font-mono text-[11px] sm:text-xs tabular-nums">
                         {(product.rating ?? 4.9).toFixed(1)}
                       </span>
-                      <span className="text-[11px] font-mono text-muted-foreground tabular-nums">
+                      <span className="text-[10px] sm:text-[11px] font-mono text-muted-foreground tabular-nums">
                         ({product.reviewCount ?? product.reviews?.length ?? 24})
                       </span>
                       <span className="text-muted-foreground/60 text-[10px]">·</span>
-                      <span className="text-[11px] text-muted-foreground">
+                      <span className="text-[10px] sm:text-[11px] text-muted-foreground truncate">
                         {product.gender === 'unisex' ? 'Unisex' : 'Atelier'}
                       </span>
                     </div>
 
-                    <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors text-base line-clamp-1">
+                    <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors text-xs sm:text-base line-clamp-1">
                       {product.name}
                     </h3>
 
-                    <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-muted-foreground line-clamp-1 sm:line-clamp-2 leading-relaxed">
                       {product.tagline}
                     </p>
                   </div>
 
                   {/* Price & Action Button */}
-                  <div className="pt-3 border-t border-border flex items-center justify-between gap-2">
+                  <div className="pt-2 sm:pt-3 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-base font-bold text-foreground font-mono tabular-nums">
+                      <div className="flex items-baseline gap-1.5 sm:gap-2">
+                        <span className="text-xs sm:text-base font-bold text-foreground font-mono tabular-nums">
                           ₦{product.retailPrice.toLocaleString()}
                         </span>
                         {hasSale && (
-                          <span className="text-xs text-muted-foreground line-through font-mono tabular-nums">
+                          <span className="text-[10px] sm:text-xs text-muted-foreground line-through font-mono tabular-nums">
                             ₦{originalPrice.toLocaleString()}
                           </span>
                         )}
                       </div>
-                      <span className="text-[10px] font-mono text-emerald-500 block">
+                      <span className="text-[9px] sm:text-[10px] font-mono text-emerald-500 hidden sm:block">
                         Direct Lagos dispatch
                       </span>
                     </div>
@@ -528,9 +528,9 @@ export const HomeView: React.FC = () => {
                         e.stopPropagation();
                         navigateTo('product-detail', { slug: product.slug });
                       }}
-                      className="px-3.5 py-2 bg-primary text-black font-semibold text-xs rounded-lg hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm"
+                      className="w-full sm:w-auto px-2.5 py-1.5 sm:px-3.5 sm:py-2 bg-primary text-black font-semibold text-[11px] sm:text-xs rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 shadow-sm"
                     >
-                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       <span>Select options</span>
                     </button>
                   </div>
