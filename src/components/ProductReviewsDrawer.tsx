@@ -165,7 +165,7 @@ export const ProductReviewsDrawer: React.FC<ProductReviewsDrawerProps> = ({
                 Share Your Atelier Experience
               </span>
               <span className="text-[11px] text-muted-foreground">
-                Drop your rating on fabric texture, silhouette drape, and bespoke fit.
+                Drop your rating on fabric texture, silhouette drape, and ready-to-wear fit.
               </span>
             </div>
             <button

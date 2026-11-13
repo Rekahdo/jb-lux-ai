@@ -307,12 +307,11 @@ export const ProductDetailView: React.FC = () => {
           {/* Size Selector */}
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-medium text-foreground">Select Size / Fit</span>
-              {product.category === 'traditional' || product.sizes.some(s => s.toLowerCase().includes('bespoke') || s.toLowerCase().includes('custom')) ? (
-                <span className="text-[#D4AF37] font-mono text-[11px] font-medium">Bespoke Fitting Available</span>
-              ) : (
-                <span className="text-muted-foreground font-mono text-[11px]">Ready-to-Wear (RTW)</span>
-              )}
+              <span className="font-medium text-foreground">Select Ready-to-Wear Size</span>
+              <span className="text-emerald-500 font-mono text-[11px] font-medium flex items-center gap-1">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Already-Made · In Stock</span>
+              </span>
             </div>
             <div className="flex flex-wrap gap-2">
               {product.sizes.map(size => (
@@ -809,7 +808,7 @@ export const ProductDetailView: React.FC = () => {
                   <MessageSquare className="w-8 h-8 text-muted-foreground/50 mx-auto" />
                   <p className="text-sm font-semibold text-foreground">Be the first to review this garment</p>
                   <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-                    Leave your rating on craftsmanship, fabric drape, and bespoke fit fidelity.
+                    Leave your rating on craftsmanship, fabric drape, and ready-to-wear sizing fidelity.
                   </p>
                   <button
                     onClick={() => setShowReviewForm(true)}

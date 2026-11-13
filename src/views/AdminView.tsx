@@ -756,7 +756,7 @@ export const AdminView: React.FC = () => {
                     className="w-full px-3 py-2 bg-secondary/50 border border-border rounded-lg text-foreground focus:outline-none focus:border-primary"
                   >
                     <option value="streetwear">Urban Streetwear</option>
-                    <option value="traditional">Bespoke Senator & Agbada</option>
+                    <option value="traditional">Ready-to-Wear Senator & Agbada</option>
                     <option value="menswear">Sartorial Menswear</option>
                     <option value="accessories">Luxury Accessories</option>
                   </select>

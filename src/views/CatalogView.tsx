@@ -18,7 +18,7 @@ import { SEO } from '../components/SEO';
 
 type GenderFilter = 'all' | 'unisex' | 'men' | 'women';
 type PricePreset = 'all' | 'under-50k' | '50k-100k' | '100k-180k' | '180k-plus' | 'custom';
-type CraftFilter = 'all' | 'bespoke' | 'rtw';
+type WearLineFilter = 'all' | 'traditional' | 'streetwear' | 'tailoring';
 type SortOption = 'featured' | 'rating-high' | 'reviews-high' | 'price-low' | 'price-high' | 'alpha-asc';
 
 export const CatalogView: React.FC = () => {
@@ -37,13 +37,13 @@ export const CatalogView: React.FC = () => {
   const [customMinPrice, setCustomMinPrice] = useState<string>('');
   const [customMaxPrice, setCustomMaxPrice] = useState<string>('');
   const [minRating, setMinRating] = useState<number>(0);
-  const [craftFilter, setCraftFilter] = useState<CraftFilter>('all');
+  const [wearLineFilter, setWearLineFilter] = useState<WearLineFilter>('all');
   const [selectedSize, setSelectedSize] = useState<string>('all');
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
 
   const categories: Array<{ id: string; label: string }> = [
     { id: 'all', label: 'All Collections' },
-    { id: 'traditional', label: 'Bespoke Senator & Agbada' },
+    { id: 'traditional', label: 'Ready-to-Wear Senator & Agbada' },
     { id: 'streetwear', label: 'Unisex Streetwear (RTW)' },
     { id: 'tailoring', label: 'Sartorial Tailoring' },
     { id: 'accessories', label: 'Luxury Accessories' },
@@ -71,15 +71,7 @@ export const CatalogView: React.FC = () => {
     { value: 4.0, label: '★ 4.0 & Above' },
   ];
 
-  const sizeOptions = ['all', 'S', 'M', 'L', 'XL', 'XXL', 'Bespoke Custom'];
-
-  // Check if a product supports bespoke tailoring
-  const isBespokeProduct = (p: typeof products[0]) => {
-    return (
-      p.category === 'traditional' ||
-      p.sizes.some(s => s.toLowerCase().includes('bespoke') || s.toLowerCase().includes('custom'))
-    );
-  };
+  const sizeOptions = ['all', 'S', 'M', 'L', 'XL', 'XXL', '38R', '40R', '42R', '44R'];
 
   // Compute active filters count
   const activeFiltersCount = useMemo(() => {
@@ -90,7 +82,7 @@ export const CatalogView: React.FC = () => {
     if (pricePreset !== 'all') count++;
     if (pricePreset === 'custom' && (customMinPrice || customMaxPrice)) count++;
     if (minRating > 0) count++;
-    if (craftFilter !== 'all') count++;
+    if (wearLineFilter !== 'all') count++;
     if (selectedSize !== 'all') count++;
     if (inStockOnly) count++;
     return count;
@@ -102,7 +94,7 @@ export const CatalogView: React.FC = () => {
     customMinPrice,
     customMaxPrice,
     minRating,
-    craftFilter,
+    wearLineFilter,
     selectedSize,
     inStockOnly,
   ]);
@@ -116,7 +108,7 @@ export const CatalogView: React.FC = () => {
     setCustomMinPrice('');
     setCustomMaxPrice('');
     setMinRating(0);
-    setCraftFilter('all');
+    setWearLineFilter('all');
     setSelectedSize('all');
     setInStockOnly(false);
     setSortBy('featured');
@@ -176,18 +168,19 @@ export const CatalogView: React.FC = () => {
           if (productRating < minRating) return false;
         }
 
-        // 6. Tailoring / Craft Filter
-        if (craftFilter === 'bespoke' && !isBespokeProduct(p)) return false;
-        if (craftFilter === 'rtw' && isBespokeProduct(p)) return false;
-
-        // 7. Size Filter
-        if (selectedSize !== 'all') {
-          if (selectedSize === 'Bespoke Custom') {
-            if (!isBespokeProduct(p)) return false;
-          } else {
-            const hasSize = p.sizes.some(s => s.toLowerCase().includes(selectedSize.toLowerCase()));
-            if (!hasSize) return false;
+        // 6. Ready-to-Wear Collection Line Filter
+        if (wearLineFilter !== 'all') {
+          if (wearLineFilter === 'tailoring') {
+            if (p.category !== 'tailoring' && p.category !== 'menswear') return false;
+          } else if (p.category !== wearLineFilter) {
+            return false;
           }
+        }
+
+        // 7. Standard Size Run Filter
+        if (selectedSize !== 'all') {
+          const hasSize = p.sizes.some(s => s.toLowerCase().includes(selectedSize.toLowerCase()));
+          if (!hasSize) return false;
         }
 
         // 8. In Stock Only Filter
@@ -229,7 +222,7 @@ export const CatalogView: React.FC = () => {
     customMinPrice,
     customMaxPrice,
     minRating,
-    craftFilter,
+    wearLineFilter,
     selectedSize,
     inStockOnly,
     sortBy,
@@ -239,7 +232,7 @@ export const CatalogView: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <SEO
         title="Apparel Storefront & Wholesale Tiers"
-        description="Browse Nigerian bespoke luxury menswear, unisex streetwear, and tailored ceremonial attire. Volume wholesale discount tiers available."
+        description="Browse Nigerian already-made luxury menswear, womenswear, unisex streetwear, and ready-to-wear ceremonial attire. All items in stock for immediate dispatch."
         image="/images/product_urban_bomber_1793964581140.jpg"
         type="website"
       />
@@ -252,13 +245,13 @@ export const CatalogView: React.FC = () => {
             <span>·</span>
             <span>Direct Lagos Island Production</span>
             <span>·</span>
-            <span>Verified Atelier Quality</span>
+            <span>100% In-Stock Ready-to-Wear</span>
           </div>
           <h1 className="font-display text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
             Apparel Storefront & Wholesale
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-xl">
-            Bespoke ceremonial tailoring for men and women, ready-to-wear unisex streetwear, and volume wholesale tiers for boutiques and retail clients.
+            Already-made ceremonial attires for men and women, ready-to-wear unisex streetwear, and volume wholesale tiers in stock for immediate dispatch or in-store collection.
           </p>
         </div>
 
@@ -528,44 +521,55 @@ export const CatalogView: React.FC = () => {
               {/* Filter 3: Crafting & Tailoring Type */}
               <div className="space-y-2.5">
                 <span className="font-semibold text-foreground tracking-wide block uppercase text-[11px] font-mono text-muted-foreground">
-                  Crafting & Tailoring
+                  Ready-to-Wear Line
                 </span>
                 <div className="space-y-1.5">
                   <button
-                    onClick={() => setCraftFilter('all')}
+                    onClick={() => setWearLineFilter('all')}
                     className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg border text-left transition-colors ${
-                      craftFilter === 'all'
+                      wearLineFilter === 'all'
                         ? 'bg-primary/10 border-primary text-primary font-semibold'
                         : 'bg-secondary/40 border-border/70 text-muted-foreground hover:text-foreground hover:bg-secondary/70'
                     }`}
                   >
-                    <span>All Construction Methods</span>
-                    {craftFilter === 'all' && <Check className="w-3.5 h-3.5 text-primary" />}
+                    <span>All Ready-to-Wear Lines</span>
+                    {wearLineFilter === 'all' && <Check className="w-3.5 h-3.5 text-primary" />}
                   </button>
                   <button
-                    onClick={() => setCraftFilter('bespoke')}
+                    onClick={() => setWearLineFilter('traditional')}
                     className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg border text-left transition-colors ${
-                      craftFilter === 'bespoke'
+                      wearLineFilter === 'traditional'
                         ? 'bg-primary/10 border-primary text-primary font-semibold'
                         : 'bg-secondary/40 border-border/70 text-muted-foreground hover:text-foreground hover:bg-secondary/70'
                     }`}
                   >
                     <span className="flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5 text-primary" />
-                      <span>Bespoke Tailoring Available</span>
+                      <span>Senator & Agbada (Pre-Tailored)</span>
                     </span>
-                    {craftFilter === 'bespoke' && <Check className="w-3.5 h-3.5 text-primary" />}
+                    {wearLineFilter === 'traditional' && <Check className="w-3.5 h-3.5 text-primary" />}
                   </button>
                   <button
-                    onClick={() => setCraftFilter('rtw')}
+                    onClick={() => setWearLineFilter('streetwear')}
                     className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg border text-left transition-colors ${
-                      craftFilter === 'rtw'
+                      wearLineFilter === 'streetwear'
                         ? 'bg-primary/10 border-primary text-primary font-semibold'
                         : 'bg-secondary/40 border-border/70 text-muted-foreground hover:text-foreground hover:bg-secondary/70'
                     }`}
                   >
-                    <span>Ready-to-Wear (Standard Sizing)</span>
-                    {craftFilter === 'rtw' && <Check className="w-3.5 h-3.5 text-primary" />}
+                    <span>Urban Streetwear (RTW)</span>
+                    {wearLineFilter === 'streetwear' && <Check className="w-3.5 h-3.5 text-primary" />}
+                  </button>
+                  <button
+                    onClick={() => setWearLineFilter('tailoring')}
+                    className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg border text-left transition-colors ${
+                      wearLineFilter === 'tailoring'
+                        ? 'bg-primary/10 border-primary text-primary font-semibold'
+                        : 'bg-secondary/40 border-border/70 text-muted-foreground hover:text-foreground hover:bg-secondary/70'
+                    }`}
+                  >
+                    <span>Sartorial Blazers & Suits (RTW)</span>
+                    {wearLineFilter === 'tailoring' && <Check className="w-3.5 h-3.5 text-primary" />}
                   </button>
                 </div>
               </div>
@@ -667,10 +671,10 @@ export const CatalogView: React.FC = () => {
               </span>
             )}
 
-            {craftFilter !== 'all' && (
+            {wearLineFilter !== 'all' && (
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-secondary border border-border text-foreground font-mono text-[11px]">
-                Craft: {craftFilter === 'bespoke' ? 'Bespoke Tailoring' : 'Ready-to-Wear'}
-                <button onClick={() => setCraftFilter('all')} className="hover:text-primary">
+                Line: {wearLineFilter === 'traditional' ? 'Senator & Agbada' : wearLineFilter === 'streetwear' ? 'Streetwear' : 'Blazers & Suiting'}
+                <button onClick={() => setWearLineFilter('all')} className="hover:text-primary">
                   <X className="w-3 h-3" />
                 </button>
               </span>

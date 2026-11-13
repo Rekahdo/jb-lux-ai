@@ -30,7 +30,7 @@ export const SEO: React.FC<SEOProps> = ({
   const siteName = import.meta.env.VITE_STORE_NAME || 'JB Lux Enterprises';
   const defaultTitle = `${siteName} | Luxury Urban & Unisex Apparel (Men & Women)`;
   const defaultDescription =
-    'Premium Nigerian clothing brand offering stylish urban apparel, bespoke tailoring, and luxury unisex streetwear for men and women in wholesale and retail. Gbode Ventures Plaza, Nnamdi Azikiwe St, Lagos Island, Nigeria.';
+    'Premium Nigerian clothing brand offering stylish urban apparel, ready-to-wear luxury Senator attires, and unisex streetwear for men and women in wholesale and retail. Gbode Ventures Plaza, Nnamdi Azikiwe St, Lagos Island, Nigeria.';
   const defaultImage = '/images/hero_luxury_apparel_1793964581310.jpg';
 
   const fullTitle = title ? `${title} | ${siteName}` : defaultTitle;
@@ -116,7 +116,7 @@ export const SEO: React.FC<SEOProps> = ({
       <meta name="robots" content="index, follow" />
       <meta
         name="keywords"
-        content="JB Lux, JB Lux Enterprises, Lagos Island clothing, Gbode Ventures Plaza, Nigerian fashion, unisex luxury streetwear, bespoke tailoring, Senator suit, unisex fashion Nigeria, men and women apparel, wholesale fashion Lagos, Nnamdi Azikiwe street"
+        content="JB Lux, JB Lux Enterprises, Lagos Island clothing, Gbode Ventures Plaza, Nigerian fashion, unisex luxury streetwear, ready to wear fashion, already made clothes, Senator suit, unisex fashion Nigeria, men and women apparel, wholesale fashion Lagos, Nnamdi Azikiwe street"
       />
       <link rel="canonical" href={canonicalUrl} />
 

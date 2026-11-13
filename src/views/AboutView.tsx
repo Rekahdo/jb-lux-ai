@@ -11,7 +11,7 @@ export const AboutView: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
       <SEO
         title="Lagos Island Flagship Studio & Atelier Heritage | Men & Women"
-        description="Experience JB Lux at Gbode Ventures Plaza, Nnamdi Azikiwe Street, Lagos Island. Master-tailored urban luxury, bespoke ceremonial attire, and wholesale production for men and women."
+        description="Experience JB Lux at Gbode Ventures Plaza, Nnamdi Azikiwe Street, Lagos Island. Master-tailored urban luxury, already-made ceremonial attire, and wholesale production for men and women."
         image="/images/store_lagos_flagship_1793964582670.jpg"
         type="website"
       />
@@ -24,7 +24,7 @@ export const AboutView: React.FC = () => {
           Crafting Nigeria’s Defining Contemporary Luxury & Unisex Apparel
         </h1>
         <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-          Founded on Lagos Island, JB Lux Enterprises embodies the bold, unapologetic ambition of contemporary African style. From bespoke ceremonial Senator suits and tailored silhouettes to heavy-weight luxury streetwear designed for both men and women, each piece is engineered for presence, permanence, and prestige.
+          Founded on Lagos Island, JB Lux Enterprises embodies the bold, unapologetic ambition of contemporary African style. From already-made ceremonial Senator suits and ready-to-wear tailored silhouettes to heavy-weight luxury streetwear designed for both men and women, each piece is pre-tailored and in stock, engineered for presence, permanence, and prestige.
         </p>
       </div>
 
@@ -59,10 +59,10 @@ export const AboutView: React.FC = () => {
             <Scissors className="w-5 h-5" />
           </div>
           <h3 className="font-display text-lg font-bold text-foreground">
-            Bespoke Tailoring Standard
+            Artisanal Ready-to-Wear Standard
           </h3>
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Every garment begins with hand-selected textiles—from 500 GSM loopback Egyptian cottons to Super 150s Italian wools. Our master pattern-makers cut each garment with geometric precision to deliver a commanding silhouette.
+            Every garment begins with hand-selected textiles—from 500 GSM loopback Egyptian cottons to Super 150s Italian wools. Our master pattern-makers pre-tailor each silhouette with geometric precision, ready for immediate wear.
           </p>
         </div>
 

@@ -26,7 +26,7 @@ export const ContactView: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
       <SEO
         title="Direct Contact & WhatsApp Atelier Desk"
-        description="Inquiries for wholesale contracts, bespoke fittings, and store visits. Gbode Ventures Plaza, Nnamdi Azikiwe St, Lagos Island. WhatsApp: +234 906 124 0069."
+        description="Inquiries for wholesale contracts, ready-to-wear sizing, and Gbode Plaza store visits. Nnamdi Azikiwe St, Lagos Island. WhatsApp: +234 906 124 0069."
         type="website"
       />
       {/* Header */}
@@ -38,7 +38,7 @@ export const ContactView: React.FC = () => {
           Connect with JB Lux Enterprises
         </h1>
         <p className="text-xs sm:text-sm text-muted-foreground">
-          Direct inquiries for retail, high-volume wholesale contracts, and bespoke Lagos Island atelier appointments.
+          Direct inquiries for retail, high-volume wholesale contracts, and ready-to-wear Gbode Plaza store visits.
         </p>
       </div>
 
@@ -173,7 +173,7 @@ export const ContactView: React.FC = () => {
                 className="w-full px-3 py-2 bg-secondary/50 border border-border rounded-lg text-foreground focus:outline-none focus:border-primary font-medium"
               >
                 <option value="wholesale">Wholesale Bulk Purchase & Reseller Tier</option>
-                <option value="bespoke">Bespoke Senator / Agbada Fitting</option>
+                <option value="rtw-sizing">Ready-to-Wear Sizing & Garment Availability</option>
                 <option value="order">Payment Receipt Verification Follow-up</option>
                 <option value="general">General Brand Inquiry</option>
               </select>
@@ -188,7 +188,7 @@ export const ContactView: React.FC = () => {
                 rows={5}
                 value={message}
                 onChange={e => setMessage(e.target.value)}
-                placeholder="Please describe the quantities, preferred styles, sizes, or custom measurements you require..."
+                placeholder="Please describe the quantities, preferred ready-to-wear styles, or sizes you require..."
                 className="w-full px-3 py-2 bg-secondary/50 border border-border rounded-lg text-foreground focus:outline-none focus:border-primary resize-none leading-relaxed"
               />
             </div>

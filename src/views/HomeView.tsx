@@ -38,14 +38,14 @@ export const HomeView: React.FC = () => {
 
   const featuredProducts = products.filter(p => p.isFeatured && p.isActive).slice(0, 4);
 
-  // Core Categories for Section 1
+  // Core Categories for Section 1 (Already-Made Luxury Lines)
   const apparelCategories = [
     {
       id: 'traditional',
       title: 'Tailored Senator Attires',
-      subtitle: 'Ceremonial & Diplomatic Wear',
+      subtitle: 'Ready-to-Wear Ceremonial & Diplomatic Wear',
       count: '14 Masterpieces',
-      tag: 'Bespoke Available',
+      tag: 'Ready to Wear',
       image: '/images/product_senator_suit_1793964581978.jpg',
       categoryKey: 'traditional',
     },
@@ -77,13 +77,13 @@ export const HomeView: React.FC = () => {
       categoryKey: 'streetwear',
     },
     {
-      id: 'bespoke',
-      title: 'Bespoke Atelier Fittings',
-      subtitle: 'In-Person Consultation & Private Cut',
-      count: 'Custom Craft',
-      tag: 'Gbode Plaza',
-      image: '/images/store_lagos_flagship_1793964582670.jpg',
-      isService: true,
+      id: 'tailoring',
+      title: 'Sartorial Blazers & Suits',
+      subtitle: 'Already-Made Evening & Gala Wear',
+      count: '8 Silhouettes',
+      tag: 'Pre-Tailored RTW',
+      image: '/images/hero_luxury_apparel_1793964581310.jpg',
+      categoryKey: 'tailoring',
     },
   ];
 
@@ -117,9 +117,9 @@ export const HomeView: React.FC = () => {
       rating: 5,
       headline: 'Savile Row precision infused with Nigerian royalty',
       comment:
-        'The Aurum Monarch Senator suit exceeded my expectations. The solid gilded buttons, hidden placket, and Super 150s merino wool drape commanded total respect at diplomatic sessions in Abuja. Impeccable tailoring.',
+        'The Aurum Monarch Senator suit exceeded my expectations. The solid gilded buttons, hidden placket, and Super 150s merino wool drape commanded total respect at diplomatic sessions in Abuja. Impeccable ready-to-wear sizing.',
       verified: true,
-      tier: 'Private Bespoke Client',
+      tier: 'Ready-to-Wear Senator Set',
     },
     {
       id: 'test-3',
@@ -165,14 +165,14 @@ export const HomeView: React.FC = () => {
         'All wholesale orders exceeding ₦500,000 qualify for 100% free courier dispatch within Lagos Island and surrounding commercial districts. For orders across Lagos state, doorstep delivery takes 24 to 48 hours. For Nigeria’s remaining 35 states (Abuja, Port Harcourt, Kano, etc.), insured courier dispatch takes 2 to 4 business days. International express air shipping via DHL takes 4 to 7 business days. Free in-person pickup is always available at our Gbode Ventures Plaza flagship on Nnamdi Azikiwe Street.',
     },
     {
-      question: 'Can I request bespoke tailoring or custom measurements?',
+      question: 'Do you offer custom tailoring on demand or take custom measurements?',
       answer:
-        'Yes. Bespoke ceremonial wear and custom fittings are the bedrock of our atelier heritage. You can visit our flagship atelier at Gbode Ventures Plaza, Lagos Island for a personal measurement session with our master cut-tailors, or schedule a virtual measurement consultation via WhatsApp (+234 906 124 0069) where our senior fitters guide you step-by-step through our structured measurement ledger.',
+        'No, JB Lux Enterprises deals exclusively in already-made, ready-to-wear (RTW) luxury apparel for men and women. We do not offer tailoring wears on demand or bespoke measurement services. Every garment—from Senator suits and Agbadas to hoodies, blazers, and denim bottoms—is pre-tailored to precision standard luxury size runs (S through XXL, 38R through 48R) and is fully finished in stock at Gbode Ventures Plaza for immediate dispatch or in-store walk-in purchase.',
     },
     {
       question: 'What is your return and exchange policy?',
       answer:
-        'We stand behind every hand-stitched seam. If a ready-to-wear garment does not fit as desired, we offer hassle-free size exchanges within 7 business days of delivery, provided the item is unworn, unwashed, and retains all original tags and security ribbons. For bespoke tailored attire, we provide complimentary in-atelier alterations until your silhouette meets complete perfection.',
+        'We stand behind every hand-finished seam. If an already-made garment does not fit as desired, we offer hassle-free size exchanges within 7 business days of delivery, provided the item is unworn, unwashed, and retains all original tags and security ribbons. For local Lagos patrons, you can also walk directly into our Gbode Ventures Plaza flagship on Nnamdi Azikiwe Street for an instant size swap.',
     },
   ];
 
@@ -202,7 +202,7 @@ export const HomeView: React.FC = () => {
     <div className="space-y-16 sm:space-y-24 pb-16">
       <SEO
         title="Royal Heritage & Contemporary Urban Apparel | Men & Women"
-        description="Handcrafted African sartorial luxury, bespoke Senator attires, and heavyweight unisex streetwear from Gbode Ventures Plaza, Lagos Island. Retail & wholesale bulk tiers for men and women."
+        description="Handcrafted African sartorial luxury, already-made Senator attires, and heavyweight unisex streetwear from Gbode Ventures Plaza, Lagos Island. Ready-to-wear retail & wholesale bulk tiers for men and women in stock."
         image="/images/hero_luxury_apparel_1793964581310.jpg"
         type="website"
       />
@@ -225,7 +225,7 @@ export const HomeView: React.FC = () => {
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center text-white space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-primary/40 text-primary text-xs font-mono tracking-widest uppercase">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Lagos Island Bespoke Tailoring & Unisex Streetwear</span>
+            <span>Already-Made Luxury Apparel · Lagos Island Flagship</span>
           </div>
 
           <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] max-w-4xl mx-auto text-balance">
@@ -233,7 +233,7 @@ export const HomeView: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto font-light leading-relaxed">
-            Crafted at Gbode Ventures Plaza, Lagos Island. Tailored Senator attires, heavyweight luxury unisex streetwear, and sartorial silhouettes engineered for men and women of distinction. Available in single retail and high-volume wholesale tiers.
+            Crafted at Gbode Ventures Plaza, Lagos Island. Already-made Senator attires, heavyweight luxury unisex streetwear, and pre-tailored sartorial silhouettes engineered for men and women of distinction. In stock for immediate dispatch or in-store collection.
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -290,7 +290,7 @@ export const HomeView: React.FC = () => {
               Shop by Category
             </h2>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-xl">
-              From bespoke traditional Senator sets to 500 GSM loopback streetwear and tailored denim bottoms.
+              From pre-tailored traditional Senator sets to 500 GSM loopback streetwear and ready-to-wear denim bottoms.
             </p>
           </div>
 
@@ -308,13 +308,7 @@ export const HomeView: React.FC = () => {
           {apparelCategories.map((cat, idx) => (
             <div
               key={cat.id}
-              onClick={() => {
-                if (cat.isService) {
-                  navigateTo('contact');
-                } else {
-                  navigateTo('catalog');
-                }
-              }}
+              onClick={() => navigateTo('catalog')}
               className="group relative cursor-pointer overflow-hidden rounded-xl bg-card border border-border transition-all duration-300 hover:border-primary/50 hover:shadow-lg flex flex-col justify-between aspect-[3/4] p-5"
             >
               {/* Background Image with Dark Gradient Scrim */}
@@ -664,8 +658,8 @@ export const HomeView: React.FC = () => {
             rel="noreferrer"
             className="w-full sm:w-auto px-8 py-3.5 bg-secondary hover:bg-secondary/80 border border-border text-foreground font-semibold text-xs rounded-lg transition-colors flex items-center justify-center gap-2"
           >
-            <Scissors className="w-4 h-4 text-primary" />
-            <span>Book Atelier Appointment</span>
+            <Phone className="w-4 h-4 text-primary" />
+            <span>Chat With Store Sales</span>
           </a>
         </div>
 
@@ -673,14 +667,14 @@ export const HomeView: React.FC = () => {
         <div className="p-6 bg-secondary/40 border border-border rounded-2xl grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
           <div className="flex items-start gap-3.5">
             <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
-              <Scissors className="w-4 h-4" />
+              <Sparkles className="w-4 h-4" />
             </div>
             <div>
               <strong className="text-foreground font-semibold block text-sm mb-0.5">
-                Atelier Crafted
+                Already-Made Luxury
               </strong>
               <p className="text-muted-foreground leading-relaxed">
-                Precision-cut and hand-finished at our Gbode Ventures Plaza atelier on Lagos Island using imported Italian wools and heavyweight knits.
+                Pre-tailored luxury garments finished and in stock at our Gbode Ventures Plaza store on Lagos Island, ready for immediate dispatch.
               </p>
             </div>
           </div>
@@ -736,7 +730,7 @@ export const HomeView: React.FC = () => {
           <div className="p-8 sm:p-10 lg:p-12 space-y-6 flex flex-col justify-center">
             <div className="space-y-2">
               <span className="text-xs font-mono uppercase tracking-wider text-primary">
-                Atelier Heritage & Physical Store
+                Physical Flagship & Warehouse
               </span>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground">
                 Experience JB Lux on Lagos Island
@@ -744,7 +738,7 @@ export const HomeView: React.FC = () => {
             </div>
 
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Located in the heart of Lagos Island's historic mercantile district on Nnamdi Azikiwe Street, JB Lux Enterprises crafts premium unisex streetwear and bespoke tailoring for men and women with world-class precision.
+              Located in the heart of Lagos Island's historic mercantile district on Nnamdi Azikiwe Street, JB Lux Enterprises provides already-made luxury apparel and unisex streetwear for men and women, available for immediate walk-in purchase and bulk wholesale collection.
             </p>
 
             <div className="space-y-3 border-y border-border py-4 text-xs">
@@ -752,7 +746,7 @@ export const HomeView: React.FC = () => {
                 <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-foreground block">{settings.storeAddress}</strong>
-                  <span className="text-muted-foreground">In-person consultations & bulk collections available.</span>
+                  <span className="text-muted-foreground">In-person walk-in fitting & bulk wholesale collections available.</span>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -771,7 +765,7 @@ export const HomeView: React.FC = () => {
                 rel="noreferrer"
                 className="px-6 py-2.5 bg-primary text-black font-semibold text-xs rounded-lg hover:opacity-90 transition-opacity"
               >
-                Book Atelier Appointment
+                Chat with Flagship Sales
               </a>
               <button
                 onClick={() => navigateTo('contact')}
@@ -795,7 +789,7 @@ export const HomeView: React.FC = () => {
             Frequently Asked Questions & Terms
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground max-w-xl mx-auto">
-            Transparent details regarding our automated wholesale volume discounts, manual bank verification, bespoke fittings, and nationwide shipping.
+            Transparent details regarding our automated wholesale volume discounts, manual bank verification, already-made luxury stock, and nationwide shipping.
           </p>
         </div>
 
@@ -931,7 +925,7 @@ export const HomeView: React.FC = () => {
                 )}
 
                 <p className="text-[11px] text-white/50 font-mono">
-                  Zero spam. Strictly bespoke drop previews, restocks & wholesale terms. Unsubscribe anytime.
+                  Zero spam. Strictly ready-to-wear collection drop previews, restocks & wholesale terms. Unsubscribe anytime.
                 </p>
               </form>
             </div>

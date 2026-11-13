@@ -32,7 +32,7 @@ export const CartView: React.FC = () => {
           Your Shopping Bag is Empty
         </h2>
         <p className="text-sm text-muted-foreground max-w-md mx-auto">
-          Explore our sartorial tuxedos, bespoke Senator outfits, and heavyweight luxury streetwear.
+          Explore our ready-to-wear blazers, pre-tailored Senator outfits, and heavyweight luxury streetwear.
         </p>
         <button
           onClick={() => navigateTo('catalog')}

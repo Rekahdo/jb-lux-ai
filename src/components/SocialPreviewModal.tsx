@@ -17,13 +17,13 @@ export const SocialPreviewModal: React.FC<SocialPreviewModalProps> = ({ isOpen, 
   // Resolve current dynamic title, description, and image based on route
   let pageTitle = 'JB Lux Enterprises | Luxury Urban & Unisex Apparel (Men & Women)';
   let pageDesc =
-    'Premium Nigerian fashion brand offering stylish urban apparel, bespoke tailoring, and unisex streetwear for men and women in wholesale and retail. Gbode Ventures Plaza, Nnamdi Azikiwe St, Lagos Island, Nigeria.';
+    'Premium Nigerian fashion brand offering stylish already-made urban apparel, luxury Senator attires, and unisex streetwear for men and women in wholesale and retail. Gbode Ventures Plaza, Nnamdi Azikiwe St, Lagos Island, Nigeria.';
   let pageImage = '/images/hero_luxury_apparel_1793964581310.jpg';
 
   if (currentRoute === 'catalog') {
     pageTitle = 'Apparel Storefront & Wholesale Tiers | JB Lux Enterprises';
     pageDesc =
-      'Explore bespoke Senator outfits, luxury streetwear hoodies, and tailored tuxedos. Wholesale volume discounts up to 45% with bank receipt verification.';
+      'Explore already-made Senator outfits, luxury streetwear hoodies, and pre-tailored blazers. Wholesale volume discounts up to 45% with bank receipt verification.';
     pageImage = '/images/product_urban_bomber_1793964581140.jpg';
   } else if (currentRoute === 'product-detail') {
     const prod = products.find(p => p.slug === routeParams.slug) || products[0];
@@ -40,7 +40,7 @@ export const SocialPreviewModal: React.FC<SocialPreviewModalProps> = ({ isOpen, 
   } else if (currentRoute === 'contact') {
     pageTitle = 'Contact & WhatsApp Atelier Concierge | JB Lux Enterprises';
     pageDesc =
-      'Connect directly with JB Lux on Lagos Island for wholesale bulk inquiries, bespoke fittings, and order support via WhatsApp (+234 906 124 0069).';
+      'Connect directly with JB Lux on Lagos Island for wholesale bulk inquiries, ready-to-wear sizing, and order support via WhatsApp (+234 906 124 0069).';
   } else if (currentRoute === 'cart') {
     pageTitle = 'Shopping Bag & Bulk Volume Discounts | JB Lux Enterprises';
     pageDesc = 'Review your retail and wholesale selections prior to manual bank transfer checkout and receipt submission.';
